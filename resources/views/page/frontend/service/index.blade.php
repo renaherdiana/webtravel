@@ -30,13 +30,6 @@
                     </div>
                     <div class="categories-content rounded-bottom p-4">
                         <h4>Mercedes Benz R3</h4>
-                        <div class="categories-review mb-4">
-                            <div class="d-flex justify-content-center text-secondary">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                <i class="fas fa-star text-body"></i>
-                            </div>
-                        </div>
                         <div class="mb-4">
                             <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$150/Hari</h4>
                         </div>
@@ -52,13 +45,6 @@
                     </div>
                     <div class="categories-content rounded-bottom p-4">
                         <h4>Toyota Corolla Cross</h4>
-                        <div class="categories-review mb-4">
-                            <div class="d-flex justify-content-center text-secondary">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                <i class="fas fa-star text-body"></i>
-                            </div>
-                        </div>
                         <div class="mb-4">
                             <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$150/Hari</h4>
                         </div>
@@ -74,13 +60,6 @@
                     </div>
                     <div class="categories-content rounded-bottom p-4">
                         <h4>Tesla Model S Plaid</h4>
-                        <div class="categories-review mb-4">
-                            <div class="d-flex justify-content-center text-secondary">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                <i class="fas fa-star text-body"></i>
-                            </div>
-                        </div>
                         <div class="mb-4">
                             <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$170/Hari</h4>
                         </div>
@@ -96,13 +75,6 @@
                     </div>
                     <div class="categories-content rounded-bottom p-4">
                         <h4>Hyundai Kona Electric</h4>
-                        <div class="categories-review mb-4">
-                            <div class="d-flex justify-content-center text-secondary">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                        </div>
                         <div class="mb-4">
                             <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$187/Hari</h4>
                         </div>

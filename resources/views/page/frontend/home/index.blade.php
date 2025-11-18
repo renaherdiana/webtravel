@@ -281,7 +281,6 @@
                             <img src="{{ asset('assetsfrontend/img/testimonial-1.jpg') }}" class="img-fluid" alt="">
                             <div class="ms-4">
                                 <h4>Rena</h4>
-                                <p>Freelancer Travel Blogger</p>
                                 <div class="d-flex text-primary">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -302,7 +301,6 @@
                             <img src="{{ asset('assetsfrontend/img/testimonial-2.jpg') }}" class="img-fluid" alt="">
                             <div class="ms-4">
                                 <h4>Dwi Intan</h4>
-                                <p>Pengusaha</p>
                                 <div class="d-flex text-primary">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -323,7 +321,6 @@
                              <img src="{{ asset('assetsfrontend/img/testimonial-3.jpg') }}" class="img-fluid" alt="">
                             <div class="ms-4">
                                 <h4>Vina</h4>
-                                <p>Mahasiswa</p>
                                 <div class="d-flex text-primary">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>

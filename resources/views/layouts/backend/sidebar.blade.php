@@ -7,6 +7,7 @@
     font-size: 1.25rem;        /* ikon lebih besar */
     width: 24px;               /* supaya rata */
     text-align: center;
+    color: #6c63ff !important; /* semua ikon jadi ungu */
 }
 
 .nav-link {
@@ -38,7 +39,6 @@
 }
 </style>
 
-
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main">
 
     <div class="sidenav-header text-center" style="overflow: visible !important;">
@@ -69,71 +69,79 @@
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('adminpanel/travel*') ? 'active' : '' }}"
                    href="{{ route('adminpanel.travel') }}">
-                    <i class="ni ni-shop text-primary"></i>
+                    <i class="ni ni-shop"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <!-- Hero -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('hero*') ? 'active' : '' }}" href="/hero">
-                    <i class="ni ni-bold-up text-info"></i>
+                <a class="nav-link {{ request()->is('adminpanel/hero*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.hero') }}">
+                    <i class="ni ni-image"></i>
                     <span>Hero</span>
                 </a>
             </li>
 
             <!-- About -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('about*') ? 'active' : '' }}" href="/about">
-                    <i class="ni ni-single-copy-04 text-success"></i>
+                <a class="nav-link {{ request()->is('adminpanel/about*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.about') }}">
+                    <i class="ni ni-single-02"></i>
                     <span>About</span>
                 </a>
             </li>
 
             <!-- Gallery -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('gallery*') ? 'active' : '' }}" href="/gallery">
-                    <i class="ni ni-image text-warning"></i>
+                <a class="nav-link {{ request()->is('adminpanel/gallery*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.gallery') }}">
+                    <i class="ni ni-album-2"></i>
                     <span>Gallery</span>
                 </a>
             </li>
 
             <!-- Tenaga Kerja -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('tenaga-kerja*') ? 'active' : '' }}" href="/tenaga-kerja">
-                    <i class="ni ni-badge text-danger"></i>
+                <a class="nav-link {{ request()->is('adminpanel/tenagakerja*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.tenagakerja') }}">
+                    <i class="ni ni-badge"></i>
                     <span>Tenaga Kerja</span>
                 </a>
             </li>
 
             <!-- Partners -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('partners*') ? 'active' : '' }}" href="/partners">
-                    <i class="ni ni-world text-primary"></i>
+                <a class="nav-link {{ request()->is('adminpanel/partners*') ? 'active' : '' }}"
+                    href="{{ route('adminpanel.partners') }}">
+                    <i class="ni ni-world"></i>
                     <span>Partners</span>
                 </a>
             </li>
 
             <!-- Sejarah -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('sejarah*') ? 'active' : '' }}" href="/sejarah">
-                    <i class="ni ni-books text-dark"></i>
+                <a class="nav-link {{ request()->is('adminpanel/sejarah*') ? 'active' : '' }}" 
+                    href="{{ route('adminpanel.sejarah') }}">
+                    <i class="ni ni-books"></i>
                     <span>Sejarah</span>
                 </a>
             </li>
 
             <!-- Service -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('service*') ? 'active' : '' }}" href="/service">
-                    <i class="ni ni-settings text-info"></i>
+                <a class="nav-link {{ request()->is('adminpanel/service*') ? 'active' : '' }}" 
+                    href="{{ route('adminpanel.service') }}">
+                    <i class="ni ni-settings"></i>
                     <span>Service</span>
                 </a>
             </li>
 
             <!-- Testimonial -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('testimonial*') ? 'active' : '' }}" href="/testimonial">
-                    <i class="ni ni-chat-round text-success"></i>
+                <a class="nav-link {{ request()->is('adminpanel/testimonial*') ? 'active' : '' }}" 
+                    href="{{ route('adminpanel.testimonial') }}">
+                    <i class="ni ni-chat-round"></i>
                     <span>Testimonial</span>
                 </a>
             </li>
@@ -141,7 +149,7 @@
             <!-- Media Sosial -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('media-sosial*') ? 'active' : '' }}" href="/media-sosial">
-                    <i class="ni ni-mobile-button text-warning"></i>
+                    <i class="ni ni-mobile-button"></i>
                     <span>Media Sosial</span>
                 </a>
             </li>
@@ -149,7 +157,7 @@
             <!-- Contact -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('contact*') ? 'active' : '' }}" href="/contact">
-                    <i class="ni ni-send text-danger"></i>
+                    <i class="ni ni-send"></i>
                     <span>Contact Us</span>
                 </a>
             </li>
@@ -159,7 +167,7 @@
             <!-- Logout -->
             <li class="nav-item">
                 <a class="nav-link" href="/logout">
-                    <i class="ni ni-button-power text-dark"></i>
+                    <i class="ni ni-button-power"></i>
                     <span>Log Out</span>
                 </a>
             </li>
