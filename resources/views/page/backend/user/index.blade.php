@@ -2,11 +2,11 @@
 
 @section('content')
 
-<!-- Page Header / Judul Halaman -->
+<!-- Page Header -->
 <div class="mb-4">
     <div class="p-3 rounded-3 shadow-sm" style="background: linear-gradient(135deg, #e0d4ff, #ffffff);">
-        <h3 class="fw-bold mb-0 text-primary">Halaman Service</h3>
-        <p class="text-muted mb-0">Selamat datang di panel admin Travino Travel</p>
+        <h3 class="fw-bold mb-0 text-primary">Halaman User</h3>
+        <p class="text-muted mb-0">Data para pengguna Travino Travel</p>
     </div>
 </div>
 
@@ -23,9 +23,8 @@
                 <tr>
                     <th>No</th>
                     <th>Photo</th>
-                    <th>Merk Mobil</th>
-                    <th>Nama Mobil</th>
-                    <th>Harga</th>
+                    <th>Name</th>
+                    <th>Role</th>
                     <th style="text-align:center;">Action</th>
                 </tr>
             </thead>
@@ -37,11 +36,10 @@
                     <td>1</td>
                     <td>
                         <img src="{{ asset('assetsbackend/img/rena.jpg') }}" 
-                             class="rounded-circle" width="55" height="55" alt="Foto Mobil">
+                             class="rounded-circle" width="55" height="55" alt="Foto User">
                     </td>
-                    <td>Toyota</td>
-                    <td>Calya</td>
-                    <td>200000</td>
+                    <td>Rena Kumala</td>
+                    <td>Admin</td>
                     <td class="text-center">
 
                         <div class="mb-2">
@@ -50,7 +48,7 @@
                             <a href="#" class="btn btn-sm btn-danger">Delete</a>
                         </div>
 
-                        <a href="#" class="badge bg-success">Active</a>
+                        <span class="badge bg-success">Active</span>
 
                     </td>
                 </tr>
@@ -60,11 +58,10 @@
                     <td>2</td>
                     <td>
                         <img src="{{ asset('assetsbackend/img/rena.jpg') }}" 
-                             class="rounded-circle" width="55" height="55" alt="Foto Mobil">
+                             class="rounded-circle" width="55" height="55" alt="Foto User">
                     </td>
-                    <td>Toyota</td>
-                    <td>Avanza</td>
-                    <td>500000</td>
+                    <td>Rico Pratama</td>
+                    <td>Staff</td>
                     <td class="text-center">
 
                         <div class="mb-2">
@@ -73,7 +70,7 @@
                             <a href="#" class="btn btn-sm btn-danger">Delete</a>
                         </div>
 
-                        <a href="#" class="badge bg-secondary">Inactive</a>
+                        <span class="badge bg-secondary">Inactive</span>
 
                     </td>
                 </tr>

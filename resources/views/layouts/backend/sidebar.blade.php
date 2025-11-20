@@ -4,10 +4,10 @@
    ============================= */
 
 .nav-item i {
-    font-size: 1.25rem;        /* ikon lebih besar */
-    width: 24px;               /* supaya rata */
+    font-size: 1.25rem;
+    width: 24px;
     text-align: center;
-    color: #6c63ff !important; /* semua ikon jadi ungu */
+    color: #6c63ff !important; /* semua ikon ungu */
 }
 
 .nav-link {
@@ -39,12 +39,14 @@
 }
 </style>
 
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main">
+
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+       id="sidenav-main">
 
     <div class="sidenav-header text-center" style="overflow: visible !important;">
         <a class="navbar-brand m-0 d-block" href="{{ route('adminpanel.travel') }}" style="display:block;">
 
-            <!-- Foto Bulat -->
+            <!-- Foto bulat -->
             <div style="
                 width: 110px;
                 height: 110px;
@@ -61,6 +63,7 @@
     </div>
 
     <hr class="horizontal dark mt-0">
+
 
     <div class="collapse navbar-collapse w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav"><br><br>
@@ -101,6 +104,13 @@
                 </a>
             </li>
 
+            <!-- ======================
+                 MASTER DATA
+            ======================= -->
+            <h6 class="text-uppercase text-xs ps-4 mt-3 mb-1" style="color:#6c63ff; font-weight:700;">
+                Master Data
+            </h6>
+
             <!-- Tenaga Kerja -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('adminpanel/tenagakerja*') ? 'active' : '' }}"
@@ -110,55 +120,46 @@
                 </a>
             </li>
 
-            <!-- Partners -->
+            <!-- Pelanggan (TANPA route) -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('adminpanel/partners*') ? 'active' : '' }}"
-                    href="{{ route('adminpanel.partners') }}">
-                    <i class="ni ni-world"></i>
-                    <span>Partners</span>
-                </a>
-            </li>
-
-            <!-- Sejarah -->
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('adminpanel/sejarah*') ? 'active' : '' }}" 
-                    href="{{ route('adminpanel.sejarah') }}">
-                    <i class="ni ni-books"></i>
-                    <span>Sejarah</span>
+                <a class="nav-link {{ request()->is('adminpanel/pelanggan*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.pelanggan') }}">
+                    <i class="ni ni-circle-08"></i>
+                    <span>Pelanggan</span>
                 </a>
             </li>
 
             <!-- Service -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('adminpanel/service*') ? 'active' : '' }}" 
-                    href="{{ route('adminpanel.service') }}">
+                <a class="nav-link {{ request()->is('adminpanel/service*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.service') }}">
                     <i class="ni ni-settings"></i>
                     <span>Service</span>
                 </a>
             </li>
 
-            <!-- Testimonial -->
+            <!-- User (TANPA route) -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('adminpanel/testimonial*') ? 'active' : '' }}" 
-                    href="{{ route('adminpanel.testimonial') }}">
-                    <i class="ni ni-chat-round"></i>
-                    <span>Testimonial</span>
+                <a class="nav-link {{ request()->is('adminpanel/user*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.user') }}">
+                    <i class="ni ni-single-02"></i>
+                    <span>User</span>
                 </a>
             </li>
 
-            <!-- Media Sosial -->
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('media-sosial*') ? 'active' : '' }}" href="/media-sosial">
-                    <i class="ni ni-mobile-button"></i>
-                    <span>Media Sosial</span>
-                </a>
-            </li>
+            <!-- ======================
+                 DATA TRANSAKSI
+            ======================= -->
+            <h6 class="text-uppercase text-xs ps-4 mt-3 mb-1" style="color:#6c63ff; font-weight:700;">
+                Data Transaksi
+            </h6>
 
-            <!-- Contact -->
+            <!-- Pemesanan (TANPA route) -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('contact*') ? 'active' : '' }}" href="/contact">
-                    <i class="ni ni-send"></i>
-                    <span>Contact Us</span>
+                <a class="nav-link {{ request()->is('adminpanel/pemesanan*') ? 'active' : '' }}"
+                   href="/adminpanel/pemesanan">
+                    <i class="ni ni-cart"></i>
+                    <span>Pemesanan</span>
                 </a>
             </li>
 

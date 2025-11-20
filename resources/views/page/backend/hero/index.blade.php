@@ -2,7 +2,7 @@
 
 @section('content')
 
-<!-- Page Header / Judul Halaman -->
+<!-- Judul Halaman -->
 <div class="mb-4">
     <div class="p-3 rounded-3 shadow-sm" style="background: linear-gradient(135deg, #e0d4ff, #ffffff);">
         <h3 class="fw-bold mb-0 text-primary">Halaman Hero</h3>
@@ -12,7 +12,7 @@
 
 <!-- Button Create -->
 <div class="mb-3 text-end">
-    <a href="#" class="btn btn-primary btn-sm">+ Create New</a>
+    <a href="{{ route('adminpanel.hero.create') }}" class="btn btn-primary btn-sm">+ Create New</a>
 </div>
 
 <!-- Table -->
@@ -23,56 +23,60 @@
                 <tr>
                     <th>No</th>
                     <th>Photo</th>
-                    <th>Description</th>
+                    <th>Title</th>
                     <th style="text-align:center;">Action</th>
                 </tr>
             </thead>
 
             <tbody>
 
-                <!-- DATA 1 -->
+                @forelse ($heroes as $index => $hero)
                 <tr>
-                    <td>1</td>
+                    <td>{{ $index + 1 }}</td>
+
                     <td>
-                        <img src="{{ asset('assetsbackend/img/rena.jpg') }}" 
-                             class="rounded-circle" width="55" height="55" alt="">
+                        <img src="{{ asset('storage/' . $hero->photo) }}" 
+                             class="rounded-circle"
+                             width="55" height="55"
+                             style="object-fit: cover;"
+                             alt="Hero Photo">
                     </td>
-                    <td>Hero Description 1</td>
+
+                    <td>{{ $hero->title }}</td>
+
                     <td class="text-center">
 
-                        <!-- Tombol Action Utama -->
                         <div class="mb-2">
-                            <a href="#" class="btn btn-sm btn-info me-1">Detail</a>
-                            <a href="#" class="btn btn-sm btn-warning me-1">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="{{ route('adminpanel.hero.edit', $hero->id) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+
+                            <a href="{{ route('adminpanel.hero.delete', $hero->id) }}" 
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                Delete
+                            </a>
+
+                                <a href="{{ route('adminpanel.hero.detail', $hero->id) }}" 
+                                class="btn btn-sm btn-info me-1">
+                                    Detail
+                                </a>
                         </div>
 
-                        <!-- Status -->
-                        <a href="#" class="badge bg-success">Active</a>
+                        @if ($hero->status == 'active')
+                            <span class="badge bg-success">Active</span>
+                        @else
+                            <span class="badge bg-secondary">Inactive</span>
+                        @endif
 
                     </td>
                 </tr>
 
-                <!-- DATA 2 -->
+                @empty
                 <tr>
-                    <td>2</td>
-                    <td>
-                        <img src="{{ asset('assetsbackend/img/rena.jpg') }}" 
-                             class="rounded-circle" width="55" height="55" alt="">
-                    </td>
-                    <td>Hero Description 2</td>
-                    <td class="text-center">
-
-                        <div class="mb-2">
-                            <a href="#" class="btn btn-sm btn-info me-1">Detail</a>
-                            <a href="#" class="btn btn-sm btn-warning me-1">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                        </div>
-
-                        <a href="#" class="badge bg-secondary">Inactive</a>
-
+                    <td colspan="4" class="text-center py-4">
+                        <strong>Tidak ada data hero.</strong>
                     </td>
                 </tr>
+                @endforelse
 
             </tbody>
         </table>

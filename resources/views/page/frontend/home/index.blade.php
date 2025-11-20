@@ -5,73 +5,86 @@
 <!-- Carousel Start -->
 <div class="header-carousel position-relative">
     <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <!-- Indicators Dinamis -->
         <ol class="carousel-indicators">
-            <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
-            <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+            @foreach($heroes as $index => $hero)
+                <li data-bs-target="#carouselId"
+                    data-bs-slide-to="{{ $index }}"
+                    class="{{ $index == 0 ? 'active' : '' }}">
+                </li>
+            @endforeach
         </ol>
 
         <div class="carousel-inner" role="listbox">
-            <!-- SLIDE 1 -->
-            <div class="carousel-item active">
-                <img src="{{ asset('assetsfrontend/img/carousel-2.jpg') }}" class="img-fluid w-100" alt="First slide"/>
-                <div class="carousel-caption d-none d-lg-block">
-                    <div class="container py-4">
-                        <div class="row">
-                            <div class="col-lg-6 text-start animate__animated animate__fadeInRight" style="animation-delay: 0.5s;"><br><br><br><br><br><br>
-                                <h1 class="display-5 text-white fw-bold">Rencanakan, Jelajahi, dan Nikmati Dunia Bersama Travino.</h1>
-                                <p class="text-white mt-3">Rasakan perjalanan yang nyaman, aman, dan berkesan bersama kami.</p>
-                                <a href="booking.html" class="btn btn-primary btn-lg mt-3 animate__animated animate__fadeInUp">Booking Sekarang</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+            @foreach ($heroes as $index => $hero)
+            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                
+                <!-- FOTO DARI STORAGE -->
+                <img src="{{ asset('storage/' . $hero->photo) }}"
+                     class="img-fluid w-100"
+                     alt="Slide {{ $index }}" />
 
-            <!-- SLIDE 2 -->
-            <div class="carousel-item">
-                <img src="{{ asset('assetsfrontend/img/carousel-1.jpg') }}" class="img-fluid w-100" alt="Second slide"/>
                 <div class="carousel-caption d-none d-lg-block">
                     <div class="container py-4">
                         <div class="row">
-                            <div class="col-lg-6 text-start animate__animated animate__fadeInRight" style="animation-delay: 0.5s;"><br><br><br><br><br><br>
-                                <h1 class="display-5 text-white fw-bold">Perjalanan Lebih Mudah dan Aman Bersama Travino.</h1>
-                                <p class="text-white mt-3">Temukan pengalaman terbaik setiap kali Anda bepergian.</p>
-                                <a href="booking.html" class="btn btn-primary btn-lg mt-3 animate__animated animate__fadeInUp">Booking Sekarang</a>
+                            <div class="col-lg-6 text-start animate__animated animate__fadeInRight" style="animation-delay: 0.5s;">
+                                <br><br><br><br><br><br>
+
+                                <!-- JUDUL DARI BACKEND -->
+                                <h1 class="display-5 text-white fw-bold">{{ $hero->title }}</h1>
+
+                                <!-- DESKRIPSI DARI BACKEND -->
+                                <p class="text-white mt-3">{{ $hero->description }}</p>
+
+                                <a href="{{ route('frontend.service') }}" class="btn btn-primary btn-lg mt-3 animate__animated animate__fadeInUp">
+                                    Booking Sekarang
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
+            @endforeach
+
         </div>
     </div>
 </div>
 <!-- Carousel End -->
 
 
+@if ($about) {{-- Cek apakah ada About aktif --}}
 <!-- About Section Start -->
 <div class="container-fluid py-5 bg-light">
     <div class="container py-5">
         <div class="row align-items-center g-5">
+
             <!-- Image -->
             <div class="col-lg-6 wow animate__animated animate__fadeInLeft" data-wow-delay="0.2s">
                 <div class="shadow rounded overflow-hidden">
-                    <img src="{{ asset('assetsfrontend/img/features-img.png') }}" class="img-fluid" alt="Travino Car">
+                    @if ($about->photo)
+                        <img src="{{ asset('storage/' . $about->photo) }}" class="img-fluid" alt="{{ $about->title }}">
+                    @endif
                 </div>
             </div>
 
             <!-- Text -->
             <div class="col-lg-6 wow animate__animated animate__fadeInRight" data-wow-delay="0.4s">
-                <h2 class="mb-4 text-primary fw-bold">About <span class="text-dark">Travino</span></h2>
-                <p class="mb-3 fs-5">Travino Travel hadir sebagai mitra terpercaya dalam setiap perjalanan Anda. Kami percaya bahwa bepergian bukan hanya tentang mencapai tujuan, tetapi juga tentang menciptakan pengalaman yang berkesan di setiap langkah.</p>
-                <p class="mb-3 fs-5">Dengan layanan yang mudah, cepat, dan aman, Travino Travel berkomitmen memberikan kenyamanan serta solusi perjalanan terbaik mulai dari pemesanan tiket, akomodasi, hingga paket wisata yang dirancang khusus sesuai kebutuhan Anda.</p>
-                <p class="mb-0 fs-5">Bersama Travino, nikmati perjalanan tanpa batas dan wujudkan impian menjelajahi dunia dengan tenang.</p>
+                <h2 class="mb-4 text-primary fw-bold">{{ $about->title }}</h2>
+                <p class="mb-3 fs-5">{{ $about->description }}</p>
+
                 <div class="mt-4">
-                    <a href="booking.html" class="btn btn-outline-primary btn-lg">Mulai Perjalanan Anda</a>
+                    <a href="{{ route('frontend.service') }}" class="btn btn-outline-primary btn-lg">Mulai Perjalanan Anda</a>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+@endif
+
 <!-- About Section End -->
 
 <!-- Fact Counter -->
