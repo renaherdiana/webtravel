@@ -4,32 +4,32 @@
 
 <div class="mb-4">
     <div class="p-3 rounded-3 shadow-sm" style="background: linear-gradient(135deg, #e0d4ff, #ffffff);">
-        <h3 class="fw-bold mb-0 text-primary">Create About</h3>
-        <p class="text-muted mb-0">Form untuk menambahkan data About baru</p>
+        <h3 class="fw-bold mb-0 text-primary">Tambah Tenaga Kerja</h3>
+        <p class="text-muted mb-0">Form untuk menambahkan data tenaga kerja baru</p>
     </div>
 </div>
 
 <div class="card shadow-sm">
     <div class="card-body">
 
-        <form action="{{ route('adminpanel.about.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('adminpanel.tenagakerja.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <!-- Title -->
+            <!-- Name -->
             <div class="mb-3">
-                <label class="form-label fw-semibold">Title</label>
-                <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
+                <label class="form-label fw-semibold">Nama</label>
+                <input type="text" name="name" class="form-control" value="{{ old('name') }}" placeholder="Masukkan nama..." required>
             </div>
 
-            <!-- Description -->
+            <!-- Position -->
             <div class="mb-3">
-                <label class="form-label fw-semibold">Description</label>
-                <textarea name="description" rows="4" class="form-control">{{ old('description') }}</textarea>
+                <label class="form-label fw-semibold">Posisi / Jabatan</label>
+                <input type="text" name="position" class="form-control" value="{{ old('position') }}" placeholder="Contoh: Driver, Admin, Manager..." required>
             </div>
 
             <!-- Photo -->
             <div class="mb-3">
-                <label class="form-label fw-semibold">Photo</label>
+                <label class="form-label fw-semibold">Foto</label>
                 <input type="file" name="photo" class="form-control" required>
             </div>
 
@@ -43,7 +43,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
-            <a href="{{ route('adminpanel.about') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ route('adminpanel.tenagakerja') }}" class="btn btn-secondary">Back</a>
 
         </form>
 

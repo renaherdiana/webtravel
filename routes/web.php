@@ -45,9 +45,24 @@ Route::post('/adminpanel/about/update/{id}', [AboutBackendController::class, 'up
 Route::get('/adminpanel/about/delete/{id}', [AboutBackendController::class, 'destroy'])->name('adminpanel.about.delete');
 Route::get('/adminpanel/about/detail/{id}', [AboutBackendController::class, 'detail'])->name('adminpanel.about.detail');
 
-
+// GALLERY
 Route::get('/adminpanel/gallery', [GalleryBackendController::class, 'index'])->name('adminpanel.gallery');
+Route::get('/adminpanel/gallery/create', [GalleryBackendController::class, 'create'])->name('adminpanel.gallery.create');
+Route::post('/adminpanel/gallery/store', [GalleryBackendController::class, 'store'])->name('adminpanel.gallery.store');
+Route::get('/adminpanel/gallery/edit/{id}', [GalleryBackendController::class, 'edit'])->name('adminpanel.gallery.edit');
+Route::put('/adminpanel/gallery/update/{id}', [GalleryBackendController::class, 'update'])->name('adminpanel.gallery.update');
+Route::get('/adminpanel/gallery/detail/{id}', [GalleryBackendController::class, 'detail'])->name('adminpanel.gallery.detail');
+Route::delete('/adminpanel/gallery/delete/{id}', [GalleryBackendController::class, 'destroy'])->name('adminpanel.gallery.delete');
+
+//TENAGA KERJA
 Route::get('/adminpanel/tenagakerja', [TenagaKerjaBackendController::class, 'index'])->name('adminpanel.tenagakerja');
+Route::get('/adminpanel/tenagakerja/create', [TenagaKerjaBackendController::class, 'create'])->name('adminpanel.tenagakerja.create');
+Route::post('/adminpanel/tenagakerja/store', [TenagaKerjaBackendController::class, 'store'])->name('adminpanel.tenagakerja.store');
+Route::get('/adminpanel/tenagakerja/detail/{id}', [TenagaKerjaBackendController::class, 'detail'])->name('adminpanel.tenagakerja.detail');
+Route::get('/adminpanel/tenagakerja/edit/{id}', [TenagaKerjaBackendController::class, 'edit'])->name('adminpanel.tenagakerja.edit');
+Route::put('/adminpanel/tenagakerja/update/{id}', [TenagaKerjaBackendController::class, 'update'])->name('adminpanel.tenagakerja.update');
+Route::delete('/adminpanel/tenagakerja/delete/{id}', [TenagaKerjaBackendController::class, 'delete'])->name('adminpanel.tenagakerja.delete');
+
 Route::get('/adminpanel/partners', [PartnersBackendController::class, 'index'])->name('adminpanel.partners');
 Route::get('/adminpanel/sejarah', [SejarahBackendController::class, 'index'])->name('adminpanel.sejarah');
 Route::get('/adminpanel/service', [ServiceBackendController::class, 'index'])->name('adminpanel.service');

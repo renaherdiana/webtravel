@@ -42,7 +42,7 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save Hero</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             <a href="{{ route('adminpanel.hero') }}" class="btn btn-secondary">Back</a>
 
         </form>

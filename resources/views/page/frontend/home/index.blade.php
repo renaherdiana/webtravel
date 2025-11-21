@@ -87,149 +87,80 @@
 
 <!-- About Section End -->
 
-<!-- Fact Counter -->
-<div class="container-fluid counter py-5">
-    <div class="container py-5">
-        <div class="row g-5">
-            <!-- Pelanggan -->
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="counter-item text-center">
-                    <div class="counter-item-icon mx-auto">
-                        <i class="fas fa-users fa-2x text-white"></i>
-                    </div>
-                    <div class="counter-counting my-3">
-                        <span class="text-white fs-2 fw-bold" data-toggle="counter-up">829</span>
-                        <span class="h1 fw-bold text-white">+</span>
-                    </div>
-                    <h4 class="text-white mb-0">Pelanggan</h4>
-                </div>
-            </div>
-
-            <!-- Terpercaya -->
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="counter-item text-center">
-                    <div class="counter-item-icon mx-auto">
-                        <i class="fas fa-shield-alt fa-2x text-white"></i>
-                    </div>
-                    <div class="counter-counting my-3">
-                        <span class="text-white fs-2 fw-bold" data-toggle="counter-up">15</span>
-                        <span class="h1 fw-bold text-white">%</span>
-                    </div>
-                    <h4 class="text-white mb-0">Terpercaya</h4>
-                </div>
-            </div>
-
-            <!-- Kepuasan -->
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="counter-item text-center">
-                    <div class="counter-item-icon mx-auto">
-                        <i class="fas fa-smile fa-2x text-white"></i>
-                    </div>
-                    <div class="counter-counting my-3">
-                        <span class="text-white fs-2 fw-bold" data-toggle="counter-up">98</span>
-                        <span class="h1 fw-bold text-white">%</span>
-                    </div>
-                    <h4 class="text-white mb-0">Kepuasan Pelanggan</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Fact Counter -->
-
 <!-- Gallery Start -->
 <div class="container py-5">
     <div class="text-center mb-5">
         <h2 class="mb-4 text-primary fw-bold">Gallery <span class="text-dark">Travino</span></h2>
-        <p class="mb-0">Temukan koleksi kendaraan kami di galeri Travino. Dari mobil keluarga yang nyaman hingga armada mewah<br> untuk perjalanan istimewa, setiap gambar menceritakan kenyamanan dan layanan terbaik yang siap kami berikan untuk setiap perjalanan Anda.
+        <p class="mb-0">
+            Temukan koleksi kendaraan kami di galeri Travino. Dari mobil keluarga yang nyaman hingga armada mewah<br>
+            untuk perjalanan istimewa, setiap gambar menceritakan kenyamanan dan layanan terbaik yang siap kami berikan untuk setiap perjalanan Anda.
         </p>
     </div>
 
-
+    @if($gallery->count() > 0)
     <div class="row g-4">
 
-        <!-- Card 1 -->
+        @foreach($gallery as $item)
         <div class="col-md-4">
             <div class="gallery-card">
-                <img src="{{ asset('assetsfrontend/img/blog-1.jpg') }}" class="gallery-img" alt="Alphard">
+                <img src="{{ asset('storage/' . $item->photo) }}" class="gallery-img" alt="{{ $item->title }}">
                 <div class="gallery-body">
-                    <h5 class="title">Alphard Executive</h5>
-                    <p class="desc">Mobil mewah premium untuk perjalanan bisnis, tamu penting, atau acara istimewa Anda.</p>
+                    <h5 class="title">{{ $item->title }}</h5>
+                    <p class="desc">{{ $item->description }}</p>
                 </div>
             </div>
         </div>
-
-        <!-- Card 2 -->
-        <div class="col-md-4">
-            <div class="gallery-card">
-                <img src="{{ asset('assetsfrontend/img/blog-2.jpg') }}" class="gallery-img" alt="Hiace">
-                <div class="gallery-body">
-                    <h5 class="title">Hiace Commuter</h5>
-                    <p class="desc">Pilihan ideal untuk rombongan wisata atau perjalanan grup besar dengan fasilitas lengkap.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="col-md-4">
-            <div class="gallery-card">
-                <img src="{{ asset('assetsfrontend/img/blog-3.jpg') }}" class="gallery-img" alt="Avanza">
-                <div class="gallery-body">
-                    <h5 class="title">Toyota Avanza</h5>
-                    <p class="desc">Mobil keluarga yang nyaman, irit, dan cocok untuk perjalanan dalam kota maupun wisata.</p>
-                </div>
-            </div>
-        </div>
+        @endforeach
 
     </div>
+
+    @else
+        <!-- Kalau data kosong -->
+        <div class="text-center py-5">
+            <h5 class="text-muted">Belum ada galeri yang tersedia saat ini.</h5>
+        </div>
+    @endif
 </div>
 <!-- Gallery End -->
 
-<!-- Team Start -->
-        <div class="container-fluid testimonial pb-5">
-            <div class="container pb-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Tenaga<span class="text-primary"> Kerja</span></h1>
-                    <p class="mb-0">Di balik setiap perjalanan menyenangkan bersama Travino, ada tim tenaga kerja yang ramah, kompeten, dan siap membantu. Kami berkomitmen memberikan pengalaman perjalanan yang aman, nyaman, dan tak terlupakan untuk setiap pelanggan kami.
-                    </p>
+
+<<!-- Team Start -->
+<div class="container-fluid testimonial pb-5">
+    <div class="container pb-5">
+        <!-- Header -->
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h1 class="display-5 text-capitalize mb-3">Tenaga<span class="text-primary"> Kerja</span></h1>
+            <p class="mb-0">
+                Di balik setiap perjalanan menyenangkan bersama Travino, ada tim tenaga kerja yang ramah, kompeten,
+                dan siap membantu. Kami berkomitmen memberikan pengalaman perjalanan yang aman, nyaman,
+                dan tak terlupakan untuk setiap pelanggan kami.
+            </p>
+        </div>
+
+        <!-- Carousel -->
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+
+            @forelse($tenagaKerja as $item)
+            <div class="testimonial-item">
+                <div class="testimonial-quote">
+                    <i class="fa fa-quote-right fa-2x"></i>
                 </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                            <img src="{{ asset('assetsfrontend/img/testimonial-1.jpg') }}" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Vina</h4>
-                                <p>Profession</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                            <img src="{{ asset('assetsfrontend/img/testimonial-2.jpg') }}" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Rena</h4>
-                                <p>Profession</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                             <img src="{{ asset('assetsfrontend/img/testimonial-3.jpg') }}" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Dwi Intan</h4>
-                                <p>Profession</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="testimonial-inner p-4 d-flex flex-column align-items-center">
+                    <img src="{{ $item->photo ? asset('storage/' . $item->photo) : asset('assetsfrontend/img/default-user.png') }}" 
+                         class="img-fluid mb-3" 
+                         style="width:120px; height:120px; object-fit:cover; border-radius:50%;" 
+                         alt="{{ $item->name }}">
+                    <h4 class="mb-1">{{ $item->name }}</h4>
+                    <p class="text-muted mb-0">{{ $item->position }}</p>
                 </div>
             </div>
+            @empty
+            <p class="text-center text-muted">Belum ada tenaga kerja yang ditampilkan.</p>
+            @endforelse
+
         </div>
+    </div>
+</div>
 <!-- Team End -->
 
 <!-- Partners Start -->

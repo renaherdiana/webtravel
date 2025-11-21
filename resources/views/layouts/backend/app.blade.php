@@ -7,6 +7,7 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Nucleo Icons -->
   <link href="{{ asset('assetsbackend/css/nucleo-icons.css') }}" rel="stylesheet" />
@@ -14,6 +15,7 @@
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  
 
   <!-- Soft UI CSS -->
   <link id="pagestyle" href="{{ asset('assetsbackend/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" />
