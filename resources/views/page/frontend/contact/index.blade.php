@@ -2,6 +2,16 @@
 
 @section('content')
 
+<!-- Notifikasi -->
+@if(session('success'))
+<div class="container mt-3">
+    <div class="alert alert-success alert-dismissible fade show small text-center" role="alert" style="max-width: 400px; margin: 0 auto;">
+        {{ session('success') }}
+        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+@endif
+
 <!-- Header Start -->
 <div class="container-fluid bg-breadcrumb">
     <div class="container text-center py-5" style="max-width: 900px;">
@@ -69,74 +79,44 @@
             </div>
 
             <!-- Contact Form -->
-            <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="bg-secondary p-5 rounded">
-                    <h4 class="text-primary mb-4">Send Your Message</h4>
-                    <form>
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                    <label for="name">Your Name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                    <label for="email">Your Email</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="tel" class="form-control" id="phone" placeholder="Phone">
-                                    <label for="phone">Your Phone</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="project" placeholder="Project">
-                                    <label for="project">Your Project</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                    <label for="subject">Subject</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 160px"></textarea>
-                                    <label for="message">Message</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3">Send Message</button>
-                            </div>
+            <form action="{{ route('contact.send') }}" method="POST">
+                @csrf
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" name="nama" class="form-control" id="name" placeholder="Your Name" required>
+                            <label for="name">Your Name</label>
                         </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Branch Info -->
-            <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="p-5 bg-light rounded">
-                    @for ($i = 1; $i <= 3; $i++)
-                        <div class="bg-white rounded p-4 mb-4">
-                            <h5 class="mb-3">Our Branch 0{{ $i }}</h5>
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-map-marker-alt text-primary me-2"></i>
-                                <p class="mb-0">123 Street New York, USA</p>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-phone-alt text-primary me-2"></i>
-                                <p class="mb-0">(+012) 3456 7890</p>
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Your Email" required>
+                            <label for="email">Your Email</label>
                         </div>
-                    @endfor
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="tel" name="phone" class="form-control" id="phone" placeholder="Phone">
+                            <label for="phone">Your Phone</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject">
+                            <label for="subject">Subject</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea name="message" class="form-control" placeholder="Leave a message here" id="message" style="height: 160px" required></textarea>
+                            <label for="message">Message</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary w-100 py-3">Send Message</button>
+                    </div>
                 </div>
-            </div>
-
+            </form>
         </div>
     </div>
 </div>

@@ -5,14 +5,14 @@
 <!-- Judul Halaman -->
 <div class="mb-4">
     <div class="p-3 rounded-3 shadow-sm" style="background: linear-gradient(135deg, #e0d4ff, #ffffff);">
-        <h3 class="fw-bold mb-0 text-primary">Halaman Sejarah</h3>
+        <h3 class="fw-bold mb-0 text-primary">Halaman Supir</h3>
         <p class="text-muted mb-0">Selamat datang di panel admin Travino Travel</p>
     </div>
 </div>
 
 <!-- Button Create -->
 <div class="mb-3 text-end">
-    <a href="{{ route('adminpanel.sejarah.create') }}" class="btn btn-primary btn-sm">+ Create New</a>
+    <a href="{{ route('adminpanel.supir.create') }}" class="btn btn-primary btn-sm">+ Create New</a>
 </div>
 
 <!-- Table -->
@@ -23,64 +23,62 @@
                 <tr>
                     <th>No</th>
                     <th>Photo</th>
-                    <th>Judul</th>
+                    <th>Nama Supir</th>
+                    <th>Harga</th>
                     <th style="text-align:center;">Action</th>
                 </tr>
             </thead>
 
             <tbody>
-                @forelse ($sejarah as $index => $item)
+                @forelse ($supirs ?? [] as $index => $supir)
                 <tr>
                     <td>{{ $index + 1 }}</td>
 
                     <!-- Foto -->
                     <td>
-                        @if ($item->photo)
-                            <img src="{{ asset('storage/' . $item->photo) }}" 
+                        @if ($supir->photo)
+                            <img src="{{ asset('storage/' . $supir->photo) }}" 
                                  class="rounded-circle" width="55" height="55" 
-                                 style="object-fit:cover;" alt="Sejarah Photo">
+                                 style="object-fit:cover;" alt="Foto Supir">
                         @else
                             <span class="text-muted">No Image</span>
                         @endif
                     </td>
 
-                    <!-- Judul -->
-                    <td>{{ $item->title }}</td>
+                    <!-- Nama -->
+                    <td>{{ $supir->name }}</td>
+
+                    <!-- Harga -->
+                    <td>Rp {{ number_format($supir->price, 0, ',', '.') }}</td>
 
                     <!-- Action -->
                     <td class="text-center">
                         <div class="mb-2">
-                            <a href="{{ route('adminpanel.sejarah.edit', $item->id) }}" 
-                               class="btn btn-sm btn-warning me-1">Edit</a>
+                            <a href="{{ route('adminpanel.supir.edit', $supir->id) }}" 
+                            class="btn btn-sm btn-warning me-1">Edit</a>
 
-                            <form action="{{ route('adminpanel.sejarah.delete', $item->id) }}" 
-                                  method="POST" class="d-inline"
-                                  onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-
+                            <form action="{{ route('adminpanel.supir.delete', $supir->id) }}" 
+                                method="POST" class="d-inline"
+                                onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                 @csrf
                                 @method('DELETE')
-
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                             </form>
 
-                            <a href="{{ route('adminpanel.sejarah.show', $item->id) }}" 
-                               class="btn btn-sm btn-info me-1">Detail</a>
-                               
+                            <a href="{{ route('adminpanel.supir.show', $supir->id) }}" 
+                            class="btn btn-sm btn-info me-1">Detail</a>
                         </div>
 
                         <!-- Status Badge -->
-                        @if($item->status == 'active')
-                            <span class="badge bg-success">Active</span>
-                        @else
-                            <span class="badge bg-secondary">Inactive</span>
-                        @endif
+                        <span class="badge {{ $supir->status == 'active' ? 'bg-success' : 'bg-secondary' }}">
+                            {{ ucfirst($supir->status) }}
+                        </span>
                     </td>
                 </tr>
-
                 @empty
                 <tr>
-                    <td colspan="4" class="text-center py-4">
-                        <strong>Tidak ada data sejarah.</strong>
+                    <td colspan="5" class="text-center py-4 text-muted">
+                        <strong>Tidak ada data supir.</strong>
                     </td>
                 </tr>
                 @endforelse

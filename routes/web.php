@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\HeroBackendController;
+use App\Http\Controllers\Backend\UserBackendController;
 use App\Http\Controllers\Backend\AboutBackendController;
+use App\Http\Controllers\Backend\PesanBackendController;
+use App\Http\Controllers\Backend\SupirBackendController;
 use App\Http\Controllers\Frontend\HomeFrontendController;
 use App\Http\Controllers\Backend\GalleryBackendController;
 use App\Http\Controllers\Backend\SejarahBackendController;
@@ -15,14 +18,17 @@ use App\Http\Controllers\Frontend\SejarahFrontendController;
 use App\Http\Controllers\Frontend\ServiceFrontendController;
 use App\Http\Controllers\Backend\TenagaKerjaBackendController;
 use App\Http\Controllers\Backend\TestimonialBackendController;
-use App\Http\Controllers\Backend\UserBackendController;
 
 //FRONTEND
 Route::get('/home/frontend', [HomeFrontendController::class, 'index'])->name('frontend.home');
 Route::get('/sejarah/frontend', [SejarahFrontendController::class, 'index'])->name('frontend.sejarah');
+
 Route::get('/service/frontend', [ServiceFrontendController::class, 'index'])->name('frontend.service');
-Route::get('/booking', function () {return view('page.frontend.service.booking');})->name('frontend.booking');
+Route::get('/booking', [ServiceFrontendController::class, 'booking'])->name('frontend.booking');
+
+//CONTACT
 Route::get('/contact/frontend', [ContactFrontendController::class, 'index'])->name('frontend.contact');
+Route::post('/contact/send', [ContactFrontendController::class, 'store'])->name('contact.send');
 
 //BACKEND
 Route::get('/adminpanel/travel', [DashboardBackendController::class, 'index'])->name('adminpanel.travel');
@@ -63,9 +69,54 @@ Route::get('/adminpanel/tenagakerja/edit/{id}', [TenagaKerjaBackendController::c
 Route::put('/adminpanel/tenagakerja/update/{id}', [TenagaKerjaBackendController::class, 'update'])->name('adminpanel.tenagakerja.update');
 Route::delete('/adminpanel/tenagakerja/delete/{id}', [TenagaKerjaBackendController::class, 'delete'])->name('adminpanel.tenagakerja.delete');
 
+//PARTNERS
 Route::get('/adminpanel/partners', [PartnersBackendController::class, 'index'])->name('adminpanel.partners');
+Route::get('/adminpanel/partners/create', [PartnersBackendController::class, 'create'])->name('adminpanel.partners.create');
+Route::post('/adminpanel/partners/store', [PartnersBackendController::class, 'store'])->name('adminpanel.partners.store');
+Route::get('/adminpanel/partners/edit/{id}', [PartnersBackendController::class, 'edit'])->name('adminpanel.partners.edit');
+Route::put('/adminpanel/partners/update/{id}', [PartnersBackendController::class, 'update'])->name('adminpanel.partners.update');
+Route::delete('/adminpanel/partners/delete/{id}', [PartnersBackendController::class, 'destroy'])->name('adminpanel.partners.delete');
+Route::get('/adminpanel/partners/detail/{id}', [PartnersBackendController::class, 'show'])->name('adminpanel.partners.detail');
+
+//SEJARAH
 Route::get('/adminpanel/sejarah', [SejarahBackendController::class, 'index'])->name('adminpanel.sejarah');
+Route::get('/adminpanel/sejarah/create', [SejarahBackendController::class, 'create'])->name('adminpanel.sejarah.create');
+Route::post('/adminpanel/sejarah/store', [SejarahBackendController::class, 'store'])->name('adminpanel.sejarah.store');
+Route::get('/adminpanel/sejarah/edit/{id}', [SejarahBackendController::class, 'edit'])->name('adminpanel.sejarah.edit');
+Route::put('/adminpanel/sejarah/update/{id}', [SejarahBackendController::class, 'update'])->name('adminpanel.sejarah.update');
+Route::get('/adminpanel/sejarah/delete/{id}', [SejarahBackendController::class, 'destroy'])->name('adminpanel.sejarah.delete');
+Route::get('/adminpanel/sejarah/show/{id}', [SejarahBackendController::class, 'show'])->name('adminpanel.sejarah.show');
+
+//SERVICE
 Route::get('/adminpanel/service', [ServiceBackendController::class, 'index'])->name('adminpanel.service');
+Route::get('/adminpanel/service/create', [ServiceBackendController::class, 'create'])->name('adminpanel.service.create');
+Route::post('/adminpanel/service/store', [ServiceBackendController::class, 'store'])->name('adminpanel.service.store');
+Route::get('/adminpanel/service/edit/{id}', [ServiceBackendController::class, 'edit'])->name('adminpanel.service.edit');
+Route::get('/adminpanel/service/show/{id}', [ServiceBackendController::class, 'show'])->name('adminpanel.service.show');
+Route::post('/adminpanel/service/update/{id}', [ServiceBackendController::class, 'update'])->name('adminpanel.service.update');
+Route::delete('/adminpanel/service/delete/{id}', [ServiceBackendController::class, 'destroy'])->name('adminpanel.service.delete');
+
+//TESTIMONIAL
 Route::get('/adminpanel/testimonial', [TestimonialBackendController::class, 'index'])->name('adminpanel.testimonial');
+Route::get('/adminpanel/testimonial/create', [TestimonialBackendController::class, 'create'])->name('adminpanel.testimonial.create');
+Route::post('/adminpanel/testimonial/store', [TestimonialBackendController::class, 'store'])->name('adminpanel.testimonial.store');
+Route::get('/adminpanel/testimonial/edit/{id}', [TestimonialBackendController::class, 'edit'])->name('adminpanel.testimonial.edit');
+Route::put('/adminpanel/testimonial/update/{id}', [TestimonialBackendController::class, 'update'])->name('adminpanel.testimonial.update');
+Route::get('/adminpanel/testimonial/detail/{id}', [TestimonialBackendController::class, 'detail'])->name('adminpanel.testimonial.detail');
+Route::delete('/adminpanel/testimonial/delete/{id}', [TestimonialBackendController::class, 'destroy'])->name('adminpanel.testimonial.delete');
+
 Route::get('/adminpanel/user', [UserBackendController::class, 'index'])->name('adminpanel.user');
 Route::get('/adminpanel/pelanggan', [PelangganBackendController::class, 'index'])->name('adminpanel.pelanggan');
+
+//SUPIR
+Route::get('/adminpanel/supir', [SupirBackendController::class, 'index'])->name('adminpanel.supir');
+Route::get('/adminpanel/supir/create', [SupirBackendController::class, 'create'])->name('adminpanel.supir.create');
+Route::post('/adminpanel/supir/store', [SupirBackendController::class, 'store'])->name('adminpanel.supir.store');
+Route::get('/adminpanel/supir/edit/{id}', [SupirBackendController::class, 'edit'])->name('adminpanel.supir.edit');
+Route::put('/adminpanel/supir/update/{id}', [SupirBackendController::class, 'update'])->name('adminpanel.supir.update');
+Route::delete('/adminpanel/supir/delete/{id}', [SupirBackendController::class, 'destroy'])->name('adminpanel.supir.delete');
+Route::get('/adminpanel/supir/show/{id}', [SupirBackendController::class, 'show'])->name('adminpanel.supir.show');
+
+Route::get('/adminpanel/pesan', [PesanBackendController::class, 'index'])->name('adminpanel.pesan');
+Route::get('/adminpanel/pesan/delete/{id}', [PesanBackendController::class, 'destroy'])->name('adminpanel.pesan.delete');
+Route::get('/adminpanel/pesan/detail/{id}', [PesanBackendController::class, 'show'])->name('adminpanel.pesan.detail');

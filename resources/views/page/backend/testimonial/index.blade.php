@@ -12,7 +12,7 @@
 
 <!-- Button Create -->
 <div class="mb-3 text-end">
-    <a href="#" class="btn btn-primary btn-sm">+ CREATE NEW</a>
+    <a href="{{ route('adminpanel.testimonial.create') }}" class="btn btn-primary btn-sm">+ CREATE NEW</a>
 </div>
 
 <!-- Table -->
@@ -30,55 +30,40 @@
             </thead>
 
             <tbody>
-
-                <!-- DATA 1 -->
+                @forelse($testimonials as $index => $testimonial)
                 <tr>
-                    <td>1</td>
+                    <td>{{ $index + 1 }}</td>
                     <td>
-                        <img src="{{ asset('assetsbackend/img/team-2.jpg') }}" 
-                             class="rounded-circle" width="55" height="55" alt="Foto User">
+                        <img src="{{ asset('storage/' . $testimonial->photo) }}" 
+                             class="rounded-circle" width="55" height="55" alt="{{ $testimonial->name }}">
                     </td>
-                    <td>Andi Septian</td>
-                    <td>⭐⭐⭐⭐⭐</td>
-
+                    <td>{{ $testimonial->name }}</td>
+                    <td>
+                        @for($i=1; $i<=$testimonial->rating; $i++)
+                            ⭐
+                        @endfor
+                    </td>
                     <td class="text-center">
-
-                        <!-- Tombol Action -->
                         <div class="mb-2">
-                            <a href="#" class="btn btn-sm btn-info me-1">Detail</a>
-                            <a href="#" class="btn btn-sm btn-warning me-1">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="{{ route('adminpanel.testimonial.edit', $testimonial->id) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+                            <a href="{{ route('adminpanel.testimonial.delete', $testimonial->id) }}" 
+                               class="btn btn-sm btn-danger" 
+                               onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</a>
+                            <a href="{{ route('adminpanel.testimonial.detail', $testimonial->id) }}" class="btn btn-sm btn-info me-1">Detail</a>
                         </div>
 
-                        <!-- STATUS -->
-                        <a href="#" class="badge bg-success">Active</a>
-
+                        @if($testimonial->status == 'active')
+                            <span class="badge bg-success">Active</span>
+                        @else
+                            <span class="badge bg-secondary">Inactive</span>
+                        @endif
                     </td>
                 </tr>
-
-                <!-- DATA 2 -->
+                @empty
                 <tr>
-                    <td>2</td>
-                    <td>
-                        <img src="{{ asset('assetsbackend/img/team-1.jpg') }}" 
-                             class="rounded-circle" width="55" height="55" alt="Foto User">
-                    </td>
-                    <td>Dewi Lestari</td>
-                    <td>⭐⭐⭐⭐☆</td>
-
-                    <td class="text-center">
-
-                        <div class="mb-2">
-                            <a href="#" class="btn btn-sm btn-info me-1">Detail</a>
-                            <a href="#" class="btn btn-sm btn-warning me-1">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                        </div>
-
-                        <a href="#" class="badge bg-secondary">Inactive</a>
-
-                    </td>
+                    <td colspan="5" class="text-center py-4">Belum ada testimonial.</td>
                 </tr>
-
+                @endforelse
             </tbody>
         </table>
     </div>

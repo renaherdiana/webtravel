@@ -39,13 +39,12 @@
 }
 </style>
 
-
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
        id="sidenav-main">
 
+    <!-- SIDEBAR HEADER / BRAND -->
     <div class="sidenav-header text-center" style="overflow: visible !important;">
         <a class="navbar-brand m-0 d-block" href="{{ route('adminpanel.travel') }}" style="display:block;">
-
             <!-- Foto bulat -->
             <div style="
                 width: 110px;
@@ -64,7 +63,7 @@
 
     <hr class="horizontal dark mt-0">
 
-
+    <!-- NAVIGATION -->
     <div class="collapse navbar-collapse w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav"><br><br>
 
@@ -104,6 +103,32 @@
                 </a>
             </li>
 
+            <!-- Testimonial -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('adminpanel/testimonial*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.testimonial') }}">
+                    <i class="ni ni-chat-round"></i>
+                    <span>Testimonial</span>
+                </a>
+            </li>
+
+            <!-- Partners -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('adminpanel/partners*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.partners') }}">
+                    <i class="ni ni-world"></i>
+                    <span>Partners</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('adminpanel/sejarah*') ? 'active' : '' }}"
+                href="{{ route('adminpanel.sejarah') }}">
+                    <i class="ni ni-book-bookmark"></i>
+                    <span>Sejarah</span>
+                </a>
+            </li>
+
             <!-- ======================
                  MASTER DATA
             ======================= -->
@@ -120,12 +145,20 @@
                 </a>
             </li>
 
-            <!-- Pelanggan (TANPA route) -->
+            <!-- Pelanggan -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('adminpanel/pelanggan*') ? 'active' : '' }}"
                    href="{{ route('adminpanel.pelanggan') }}">
                     <i class="ni ni-circle-08"></i>
                     <span>Pelanggan</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('adminpanel/pesan*') ? 'active' : '' }}"
+                href="{{ route('adminpanel.pesan') }}">
+                    <i class="ni ni-email-83"></i>
+                    <span>Pesan</span>
                 </a>
             </li>
 
@@ -138,7 +171,16 @@
                 </a>
             </li>
 
-            <!-- User (TANPA route) -->
+            <!-- Supir -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('adminpanel/supir*') ? 'active' : '' }}"
+                href="{{ route('adminpanel.supir') }}">
+                    <i class="ni ni-bus-front-12"></i> <!-- ikon bus / supir -->
+                    <span>Supir</span>
+                </a>
+            </li>
+            
+            <!-- User -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('adminpanel/user*') ? 'active' : '' }}"
                    href="{{ route('adminpanel.user') }}">
@@ -154,7 +196,7 @@
                 Data Transaksi
             </h6>
 
-            <!-- Pemesanan (TANPA route) -->
+            <!-- Pemesanan -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('adminpanel/pemesanan*') ? 'active' : '' }}"
                    href="/adminpanel/pemesanan">

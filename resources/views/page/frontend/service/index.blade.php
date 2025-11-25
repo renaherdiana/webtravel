@@ -2,6 +2,39 @@
 
 @section('content')
 
+<style>
+    /* ===== CUSTOM STYLE FOR SERVICE SECTION ===== */
+    .categories-content h4 {
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .categories-content h6 {
+        font-weight: 500;
+        letter-spacing: .4px;
+        color: #6c757d !important;
+        margin-bottom: 12px;
+        margin-top: -2px;
+    }
+
+    .categories-item {
+        transition: .3s ease-in-out;
+    }
+
+    .categories-item:hover {
+        transform: translateY(-6px);
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .categories-img img {
+        transition: .3s;
+    }
+
+    .categories-item:hover img {
+        transform: scale(1.05);
+    }
+</style>
+
 <!-- Header Start -->
 <div class="container-fluid bg-breadcrumb">
     <div class="container text-center py-5" style="max-width: 900px;">
@@ -23,65 +56,33 @@
         </div>
         <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
 
+            @foreach ($services as $service)
             <div class="categories-item p-4">
                 <div class="categories-item-inner">
                     <div class="categories-img rounded-top">
-                        <img src="{{ asset('assetsfrontend/img/car-1.png') }}" class="img-fluid w-100 rounded-top" alt="">
+                        @if ($service->photo)
+                            <img src="{{ asset('storage/' . $service->photo) }}" class="img-fluid w-100 rounded-top" alt="{{ $service->nama_mobil }}">
+                        @else
+                            <img src="{{ asset('assetsfrontend/img/default-car.png') }}" class="img-fluid w-100 rounded-top" alt="Default Car">
+                        @endif
                     </div>
                     <div class="categories-content rounded-bottom p-4">
-                        <h4>Mercedes Benz R3</h4>
+                        <h4 class="fw-bold mb-0">{{ $service->nama_mobil }}</h4>
+                        <h6>{{ $service->merk_mobil }}</h6>
                         <div class="mb-4">
-                            <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$150/Hari</h4>
+                            <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">
+                                Rp {{ number_format($service->harga_sewa,0,',','.') }}/Hari
+                            </h4>
                         </div>
-                        <a href="{{ route('frontend.booking') }}" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
+                        <!-- Tombol Book Now kirim mobil_id ke booking -->
+                        <a href="{{ route('frontend.booking', ['mobil_id' => $service->id]) }}" 
+                           class="btn btn-primary rounded-pill d-flex justify-content-center py-3">
+                           Book Now
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <div class="categories-item p-4">
-                <div class="categories-item-inner">
-                    <div class="categories-img rounded-top">
-                        <img src="{{ asset('assetsfrontend/img/car-2.png') }}" class="img-fluid w-100 rounded-top" alt="">
-                    </div>
-                    <div class="categories-content rounded-bottom p-4">
-                        <h4>Toyota Corolla Cross</h4>
-                        <div class="mb-4">
-                            <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$150/Hari</h4>
-                        </div>
-                        <a href="{{ route('frontend.booking') }}" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="categories-item p-4">
-                <div class="categories-item-inner">
-                    <div class="categories-img rounded-top">
-                        <img src="{{ asset('assetsfrontend/img/car-3.png') }}" class="img-fluid w-100 rounded-top" alt="">
-                    </div>
-                    <div class="categories-content rounded-bottom p-4">
-                        <h4>Tesla Model S Plaid</h4>
-                        <div class="mb-4">
-                            <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$170/Hari</h4>
-                        </div>
-                        <a href="{{ route('frontend.booking') }}" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="categories-item p-4">
-                <div class="categories-item-inner">
-                    <div class="categories-img rounded-top">
-                        <img src="{{ asset('assetsfrontend/img/car-4.png') }}" class="img-fluid w-100 rounded-top" alt="">
-                    </div>
-                    <div class="categories-content rounded-bottom p-4">
-                        <h4>Hyundai Kona Electric</h4>
-                        <div class="mb-4">
-                            <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$187/Hari</h4>
-                        </div>
-                        <a href="{{ route('frontend.booking') }}" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
 
         </div>
     </div>

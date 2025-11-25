@@ -7,18 +7,20 @@ use App\Models\Hero;
 use App\Models\About;
 use App\Models\Gallery;
 use App\Models\TenagaKerja;
+use App\Models\Partner;
+use App\Models\Testimonial;
 
 class HomeFrontendController extends Controller
 {
     public function index()
     {
-        // Ambil 2 hero active terbaru
+        // Ambil 2 hero aktif terbaru
         $heroes = Hero::where('status', 'active')
             ->latest()
             ->take(2)
             ->get();
 
-        // Ambil About active pertama
+        // Ambil About aktif pertama
         $about = About::where('status', 'active')
             ->orderBy('created_at', 'asc')
             ->first();
@@ -33,6 +35,24 @@ class HomeFrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('page.frontend.home.index', compact('heroes', 'about', 'gallery', 'tenagaKerja'));
+        // Ambil Partners aktif
+        $partners = Partner::where('status', 'active')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Ambil Testimonial aktif
+        $testimonials = Testimonial::where('status', 'active')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Kirim semua data ke view frontend
+        return view('page.frontend.home.index', compact(
+            'heroes',
+            'about',
+            'gallery',
+            'tenagaKerja',
+            'partners',
+            'testimonials'
+        ));
     }
 }

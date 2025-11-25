@@ -167,120 +167,77 @@
 <div class="container py-5">
     <div class="text-center mb-5">
         <h2 class="mb-4 text-primary fw-bold">Partners <span class="text-dark">Travino</span></h2>
-        <p class="mb-0">Travino bangga bekerja sama dengan mitra terpercaya yang mendukung setiap perjalanan Anda.<br> Dari kendaraan premium hingga layanan tambahan, setiap partner kami dipilih untuk <br>menjamin kenyamanan, keamanan, dan pengalaman terbaik bagi setiap pelanggan.
+        <p class="mb-0">
+            Travino bangga bekerja sama dengan mitra terpercaya yang mendukung setiap perjalanan Anda.<br>
+            Dari kendaraan premium hingga layanan tambahan, setiap partner kami dipilih untuk <br>
+            menjamin kenyamanan, keamanan, dan pengalaman terbaik bagi setiap pelanggan.
         </p>
     </div>
 
     <div class="row g-4 justify-content-center">
 
-        <!-- Partner 1 -->
+        @forelse($partners as $partner)
         <div class="col-md-4 col-lg-2 text-center">
-            <div class="partner-card p-3 border rounded shadow-sm">
-                <img src="{{ asset('assetsfrontend/img/car-1.png') }}" class="img-fluid mb-2" alt="Partner 1">
-                <h6 class="fw-bold">Partner 1</h6>
+            <div class="partner-card p-3 border rounded shadow-sm d-flex flex-column align-items-center justify-content-center"
+                 style="height: 180px;"> <!-- tinggi sama untuk semua -->
+                 
+                <div style="width: 80px; height: 80px; overflow: hidden; border-radius: 50%;">
+                    <img src="{{ asset('storage/' . $partner->photo) }}" class="img-fluid" 
+                         style="object-fit: cover; width: 100%; height: 100%;" 
+                         alt="{{ $partner->name }}">
+                </div>
+                
+                <h6 class="fw-bold mt-3 text-truncate" style="max-width: 100%;">{{ $partner->name }}</h6>
             </div>
         </div>
-
-        <!-- Partner 2 -->
-        <div class="col-md-4 col-lg-2 text-center">
-            <div class="partner-card p-3 border rounded shadow-sm">
-                <img src="{{ asset('assetsfrontend/img/car-2.png') }}" class="img-fluid mb-2" alt="Partner 2">
-                <h6 class="fw-bold">Partner 2</h6>
-            </div>
-        </div>
-
-        <!-- Partner 3 -->
-        <div class="col-md-4 col-lg-2 text-center">
-            <div class="partner-card p-3 border rounded shadow-sm">
-                <img src="{{ asset('assetsfrontend/img/car-3.png') }}" class="img-fluid mb-2" alt="Partner 3">
-                <h6 class="fw-bold">Partner 3</h6>
-            </div>
-        </div>
-
-        <!-- Partner 4 -->
-        <div class="col-md-4 col-lg-2 text-center">
-            <div class="partner-card p-3 border rounded shadow-sm">
-                <img src="{{ asset('assetsfrontend/img/car-4.png') }}" class="img-fluid mb-2" alt="Partner 4">
-                <h6 class="fw-bold">Partner 4</h6>
-            </div>
-        </div>
+        @empty
+        <p class="text-center text-muted">Belum ada partner yang ditampilkan.</p>
+        @endforelse
 
     </div>
 </div>
 <!-- Partners End -->
 
 <!-- Testimonial Start -->
-        <div class="container-fluid testimonial pb-5">
-            <div class="container pb-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Our Clients<span class="text-primary"> Riviews</span></h1>
-                    <p class="mb-0">Travino selalu memberikan pengalaman perjalanan yang luar biasa. Layanan yang cepat, nyaman, dan aman membuat setiap perjalanan kami menjadi lebih menyenangkan. Saya sangat merekomendasikan Travino untuk siapa pun yang ingin bepergian tanpa khawatir.
-                    </p>
-                </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                            <img src="{{ asset('assetsfrontend/img/testimonial-1.jpg') }}" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Rena</h4>
-                                <div class="d-flex text-primary">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star text-body"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-top rounded-bottom p-4">
-                            <p class="mb-0">Perjalanan bersama Travino selalu menyenangkan! Layanannya cepat, ramah, dan kendaraan yang digunakan sangat nyaman. Setiap perjalanan terasa aman dan menyenangkan. Saya pasti akan memilih Travino lagi untuk trip berikutnya.</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                            <img src="{{ asset('assetsfrontend/img/testimonial-2.jpg') }}" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Dwi Intan</h4>
-                                <div class="d-flex text-primary">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star text-body"></i>
-                                    <i class="fas fa-star text-body"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-top rounded-bottom p-4">
-                            <p class="mb-0">Travino memudahkan perjalanan bisnis saya. Proses pemesanan mudah, supir profesional, dan kendaraan bersih serta nyaman. Hanya satu bintang yang kurang karena sempat sedikit delay, tapi pengalaman keseluruhan tetap memuaskan.</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                             <img src="{{ asset('assetsfrontend/img/testimonial-3.jpg') }}" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Vina</h4>
-                                <div class="d-flex text-primary">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star text-body"></i>
-                                    <i class="fas fa-star text-body"></i>
-                                    <i class="fas fa-star text-body"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-top rounded-bottom p-4">
-                            <p class="mb-0">Pengalaman liburan keluarga kami dengan Travino luar biasa! Anak-anak senang, perjalanan aman, dan supir sangat membantu. Travino benar-benar membuat liburan kami lebih berkesan dan bebas stres.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container-fluid testimonial pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h1 class="display-5 text-capitalize mb-3">Our Clients <span class="text-primary">Reviews</span></h1>
+            <p class="mb-0">Travino selalu memberikan pengalaman perjalanan yang luar biasa. Layanan yang cepat, nyaman, dan aman membuat setiap perjalanan kami menjadi lebih menyenangkan. Setiap testimonial mencerminkan kepuasan pelanggan kami.</p>
         </div>
+
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+
+            @forelse($testimonials as $testimonial)
+                <div class="testimonial-item">
+                    <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i></div>
+
+                    <div class="testimonial-inner p-4 d-flex align-items-center">
+                        <img src="{{ asset('storage/' . $testimonial->photo) }}" class="img-fluid" alt="{{ $testimonial->name }}">
+                        <div class="ms-4">
+                            <h4>{{ $testimonial->name }}</h4>
+                            <div class="d-flex text-primary">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $testimonial->rating)
+                                        <i class="fas fa-star"></i>
+                                    @else
+                                        <i class="fas fa-star text-body"></i>
+                                    @endif
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-top rounded-bottom p-4">
+                        <p class="mb-0">{{ $testimonial->message }}</p>
+                    </div>
+                </div>
+            @empty
+                <p class="text-center text-muted">Belum ada testimonial yang ditampilkan.</p>
+            @endforelse
+
+        </div>
+    </div>
+</div>
 <!-- Testimonial End -->
 
 <style>
