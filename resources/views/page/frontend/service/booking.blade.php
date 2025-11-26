@@ -21,7 +21,8 @@
             <div class="p-5 rounded-4 shadow-lg" style="background: linear-gradient(145deg, #f0f0f0, #e0e0e0);">
                 <h2 class="text-center fw-bold mb-5" style="color: #343a40;">CONTINUE CAR RESERVATION</h2>
 
-                <form action="{{ route('frontend.booking') }}" method="GET">
+                <form action="{{ route('frontend.booking.store') }}" method="POST">
+                @csrf
 
                     <!-- Nama & Telepon -->
                     <div class="row mb-4">

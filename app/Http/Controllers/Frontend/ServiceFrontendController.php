@@ -5,55 +5,37 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\Supir;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
 class ServiceFrontendController extends Controller
 {
     /**
-     * Display the service page with all active services.
-     * Supports optional search by merk_mobil.
+     * Halaman daftar layanan mobil
      */
     public function index(Request $request)
     {
-        // Mulai query untuk service yang aktif
         $query = Service::where('status', 'active');
 
-        // Jika ada parameter pencarian merk, filter
         if ($request->has('merk') && $request->merk != '') {
             $query->where('merk_mobil', 'like', '%' . $request->merk . '%');
         }
 
-        // Ambil semua hasil, urut dari terbaru
         $services = $query->orderBy('id', 'DESC')->get();
 
-        // Kirim ke view
         return view('page.frontend.service.index', compact('services'));
     }
 
     /**
-     * Display booking form with all active services and supirs.
-     * Supports pre-selected mobil and supir if clicked from carousel or query string.
+     * Halaman booking form
      */
     public function booking(Request $request)
     {
-        // Ambil semua mobil aktif
-        $services = Service::where('status','active')->orderBy('id','DESC')->get();
+        $services = Service::where('status', 'active')->orderBy('id','DESC')->get();
+        $supirs = Supir::where('status', 'active')->orderBy('name','ASC')->get();
 
-        // Ambil semua supir aktif
-        $supirs = Supir::where('status','active')->orderBy('name','ASC')->get();
-
-        $selectedService = null;
-        $selectedSupir = null;
-
-        // Jika ada mobil_id di query string, set pre-selected
-        if($request->has('mobil_id')){
-            $selectedService = Service::find($request->mobil_id);
-        }
-
-        // Jika ada supir_id di query string, set pre-selected
-        if($request->has('supir_id')){
-            $selectedSupir = Supir::find($request->supir_id);
-        }
+        $selectedService = $request->has('mobil_id') ? Service::find($request->mobil_id) : null;
+        $selectedSupir   = $request->has('supir_id') ? Supir::find($request->supir_id) : null;
 
         return view('page.frontend.service.booking', compact(
             'services', 
@@ -61,5 +43,40 @@ class ServiceFrontendController extends Controller
             'selectedService', 
             'selectedSupir'
         ));
+    }
+
+    /**
+     * Simpan data booking pelanggan
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama'        => 'required',
+            'telepon'     => 'required',
+            'email'       => 'required|email',
+            'mobil_id'    => 'required|exists:services,id',
+            'pickup_date' => 'required|date',
+            'pickup_time' => 'required',
+            'dropoff_date'=> 'required|date',
+            'dropoff_time'=> 'required',
+        ]);
+
+        $service = Service::find($request->mobil_id);
+        $supir   = $request->supir_id ? Supir::find($request->supir_id) : null;
+
+        Pelanggan::create([
+            'nama'            => $request->nama,
+            'telepon'         => $request->telepon,
+            'email'           => $request->email,
+            'merk_mobil'      => $service->merk_mobil,
+            'tipe_mobil'      => $service->nama_mobil,
+            'tanggal_booking' => $request->pickup_date,
+            'jam_booking'     => $request->pickup_time,
+            'status'          => 'pending', 
+            'supir_id'        => $supir?->id,
+        ]);
+
+        return redirect()->route('frontend.home')
+                         ->with('success', 'Booking berhasil disimpan!');
     }
 }

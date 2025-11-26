@@ -10,11 +10,6 @@
     </div>
 </div>
 
-<!-- Button Create -->
-<div class="mb-3 text-end">
-    <a href="#" class="btn btn-primary btn-sm">+ CREATE NEW</a>
-</div>
-
 <!-- Table -->
 <div class="card shadow-sm">
     <div class="card-body p-0">
@@ -24,36 +19,72 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>No Telephone</th>
+                    <th>Status</th>
                     <th style="text-align:center;">Action</th>
                 </tr>
             </thead>
 
             <tbody>
+                @forelse($pelanggans as $key => $item)
+                    <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->telepon }}</td>
 
-                <!-- DATA 1 -->
-                <tr>
-                    <td>1</td>
-                    <td>Rena Kumala</td>
-                    <td>0812-3344-5566</td>
-                    <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-info me-1">Detail</a>
-                        <a href="#" class="btn btn-sm btn-warning me-1">Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
+                        <!-- Status Booking -->
+                        <td>
+                            @if ($item->status == 'pending')
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            @elseif ($item->status == 'ongoing')
+                                <span class="badge bg-primary">Ongoing</span>
+                            @elseif ($item->status == 'completed')
+                                <span class="badge bg-success">Completed</span>
+                            @elseif ($item->status == 'cancelled')
+                                <span class="badge bg-danger">Cancelled</span>
+                            @else
+                                <span class="badge bg-secondary">Unknown</span>
+                            @endif
+                        </td>
 
-                <!-- DATA 2 -->
-                <tr>
-                    <td>2</td>
-                    <td>Bagas Firmansyah</td>
-                    <td>0851-7788-9922</td>
-                    <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-info me-1">Detail</a>
-                        <a href="#" class="btn btn-sm btn-warning me-1">Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
+                        <td class="text-center">
+                            <!-- Detail -->
+                            <a href="{{ route('adminpanel.pelanggan.show', $item->id) }}"
+                               class="btn btn-sm btn-info me-1">
+                                Detail
+                            </a>
 
+                            <!-- Cancel -->
+                            @if($item->status != 'completed' && $item->status != 'cancelled')
+                                <form action="{{ route('adminpanel.pelanggan.cancel', $item->id) }}" 
+                                      method="POST" 
+                                      class="d-inline" 
+                                      onsubmit="return confirm('Yakin ingin membatalkan booking ini?')">
+                                    @csrf
+                                    <button class="btn btn-warning btn-sm">Cancel</button>
+                                </form>
+                            @endif
+
+                            <!-- Delete -->
+                            <form action="{{ route('adminpanel.pelanggan.destroy', $item->id) }}"
+                                  method="POST"
+                                  class="d-inline"
+                                  onsubmit="return confirm('Yakin ingin menghapus?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">
+                            Belum ada data pelanggan.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

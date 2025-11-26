@@ -23,8 +23,10 @@ use App\Http\Controllers\Backend\TestimonialBackendController;
 Route::get('/home/frontend', [HomeFrontendController::class, 'index'])->name('frontend.home');
 Route::get('/sejarah/frontend', [SejarahFrontendController::class, 'index'])->name('frontend.sejarah');
 
+//BOOKING
 Route::get('/service/frontend', [ServiceFrontendController::class, 'index'])->name('frontend.service');
 Route::get('/booking', [ServiceFrontendController::class, 'booking'])->name('frontend.booking');
+Route::post('/booking/store', [ServiceFrontendController::class, 'store'])->name('frontend.booking.store');
 
 //CONTACT
 Route::get('/contact/frontend', [ContactFrontendController::class, 'index'])->name('frontend.contact');
@@ -106,7 +108,12 @@ Route::get('/adminpanel/testimonial/detail/{id}', [TestimonialBackendController:
 Route::delete('/adminpanel/testimonial/delete/{id}', [TestimonialBackendController::class, 'destroy'])->name('adminpanel.testimonial.delete');
 
 Route::get('/adminpanel/user', [UserBackendController::class, 'index'])->name('adminpanel.user');
+
+//PELANGGAN
 Route::get('/adminpanel/pelanggan', [PelangganBackendController::class, 'index'])->name('adminpanel.pelanggan');
+Route::get('/adminpanel/pelanggan/show/{id}', [PelangganBackendController::class, 'show'])->name('adminpanel.pelanggan.show');
+Route::delete('/adminpanel/pelanggan/{id}', [PelangganBackendController::class, 'destroy'])->name('adminpanel.pelanggan.destroy');
+Route::post('/adminpanel/pelanggan/cancel/{id}', [PelangganBackendController::class, 'cancel'])->name('adminpanel.pelanggan.cancel');
 
 //SUPIR
 Route::get('/adminpanel/supir', [SupirBackendController::class, 'index'])->name('adminpanel.supir');
