@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\PesanBackendController;
 use App\Http\Controllers\Backend\SupirBackendController;
 use App\Http\Controllers\Frontend\HomeFrontendController;
 use App\Http\Controllers\Backend\GalleryBackendController;
+use App\Http\Controllers\Backend\PaymentBackendController;
 use App\Http\Controllers\Backend\SejarahBackendController;
 use App\Http\Controllers\Backend\ServiceBackendController;
 use App\Http\Controllers\Backend\PartnersBackendController;
@@ -25,8 +26,11 @@ Route::get('/sejarah/frontend', [SejarahFrontendController::class, 'index'])->na
 
 //BOOKING
 Route::get('/service/frontend', [ServiceFrontendController::class, 'index'])->name('frontend.service');
-Route::get('/booking', [ServiceFrontendController::class, 'booking'])->name('frontend.booking');
+Route::get('/booking', [ServiceFrontendController::class, 'booking'])->name('frontend.booking.form');
 Route::post('/booking/store', [ServiceFrontendController::class, 'store'])->name('frontend.booking.store');
+Route::get('/booking/payment-summary/{payment}', [ServiceFrontendController::class, 'paymentSummary'])->name('frontend.booking.payment');
+Route::post('/booking/pay/{payment}', [ServiceFrontendController::class, 'pay'])->name('frontend.booking.pay');
+Route::get('/booking/detail/{payment}', [ServiceFrontendController::class, 'paymentDetail'])->name('frontend.booking.detail');
 
 //CONTACT
 Route::get('/contact/frontend', [ContactFrontendController::class, 'index'])->name('frontend.contact');
@@ -107,6 +111,7 @@ Route::put('/adminpanel/testimonial/update/{id}', [TestimonialBackendController:
 Route::get('/adminpanel/testimonial/detail/{id}', [TestimonialBackendController::class, 'detail'])->name('adminpanel.testimonial.detail');
 Route::delete('/adminpanel/testimonial/delete/{id}', [TestimonialBackendController::class, 'destroy'])->name('adminpanel.testimonial.delete');
 
+//USER
 Route::get('/adminpanel/user', [UserBackendController::class, 'index'])->name('adminpanel.user');
 
 //PELANGGAN
@@ -124,6 +129,13 @@ Route::put('/adminpanel/supir/update/{id}', [SupirBackendController::class, 'upd
 Route::delete('/adminpanel/supir/delete/{id}', [SupirBackendController::class, 'destroy'])->name('adminpanel.supir.delete');
 Route::get('/adminpanel/supir/show/{id}', [SupirBackendController::class, 'show'])->name('adminpanel.supir.show');
 
+//PESAN
 Route::get('/adminpanel/pesan', [PesanBackendController::class, 'index'])->name('adminpanel.pesan');
 Route::get('/adminpanel/pesan/delete/{id}', [PesanBackendController::class, 'destroy'])->name('adminpanel.pesan.delete');
 Route::get('/adminpanel/pesan/detail/{id}', [PesanBackendController::class, 'show'])->name('adminpanel.pesan.detail');
+
+//PAYMENT
+Route::get('/adminpanel/payment', [PaymentBackendController::class, 'index'])->name('adminpanel.payment');
+Route::get('/adminpanel/payment/show/{id}', [PaymentBackendController::class, 'show'])->name('adminpanel.payment.show');
+Route::delete('/adminpanel/payment/destroy/{id}', [PaymentBackendController::class, 'destroy'])->name('adminpanel.payment.destroy');
+Route::post('adminpanel/payment/{payment}/pay', [PaymentBackendController::class, 'pay'])->name('adminpanel.payment.pay');

@@ -64,6 +64,9 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('assetsfrontend/js/main.js') }}"></script>
+
+    <!-- Tambahkan stack scripts di sini -->
+    @stack('scripts')
 </body>
 
 </html>

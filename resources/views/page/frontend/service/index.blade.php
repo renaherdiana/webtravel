@@ -40,8 +40,8 @@
     <div class="container text-center py-5" style="max-width: 900px;">
         <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Service</h4>
         <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-            <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
-            <li class="breadcrumb-item active text-primary">Service</li>
+            <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Service</a></li>
+            <li class="breadcrumb-item active text-primary">Booking</li>
         </ol>    
     </div>
 </div><br><br>
@@ -75,7 +75,7 @@
                             </h4>
                         </div>
                         <!-- Tombol Book Now kirim mobil_id ke booking -->
-                        <a href="{{ route('frontend.booking', ['mobil_id' => $service->id]) }}" 
+                        <a href="{{ route('frontend.booking.form', ['mobil_id' => $service->id]) }}" 
                            class="btn btn-primary rounded-pill d-flex justify-content-center py-3">
                            Book Now
                         </a>

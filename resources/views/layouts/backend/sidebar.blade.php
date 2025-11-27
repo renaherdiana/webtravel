@@ -198,8 +198,8 @@
 
             <!-- Pemesanan -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('adminpanel/pemesanan*') ? 'active' : '' }}"
-                   href="/adminpanel/pemesanan">
+                <a class="nav-link {{ request()->is('adminpanel/payment*') ? 'active' : '' }}"
+                   href="{{ route('adminpanel.payment') }}">
                     <i class="ni ni-cart"></i>
                     <span>Pemesanan</span>
                 </a>

@@ -12,112 +12,72 @@
 <div class="card shadow-sm border-0">
     <div class="card-body">
 
-        <table class="table align-middle" style="border-collapse: separate; border-spacing: 0 10px;">
-            <tbody>
+        <!-- Info Card Aesthetic -->
+        <div class="p-4 rounded-4 shadow-lg" style="background: linear-gradient(145deg, #f8f9fa, #e9ecef);">
 
-                {{-- NAMA --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="width:200px; border-radius: 8px 0 0 8px;">
-                        Nama Lengkap
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->nama }}</td>
-                </tr>
+            <!-- Nama & Kontak -->
+            <div class="text-center mb-5">
+                <h3 class="fw-bold">{{ $pelanggan->nama }}</h3>
+                <p class="text-secondary">{{ $pelanggan->telepon }} | {{ $pelanggan->email }}</p>
+            </div>
 
-                {{-- TELEPON --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Nomor Telepon
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->telepon }}</td>
-                </tr>
+            <!-- Detail Info -->
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="p-3 bg-white rounded-3 shadow-sm d-flex justify-content-between align-items-center">
+                        <strong>Mobil</strong>
+                        <span>{{ $pelanggan->merk_mobil }} - {{ $pelanggan->tipe_mobil }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-white rounded-3 shadow-sm d-flex justify-content-between align-items-center">
+                        <strong>Supir</strong>
+                        <span>{{ $pelanggan->supir->name ?? 'Tanpa Supir' }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-white rounded-3 shadow-sm d-flex justify-content-between align-items-center">
+                        <strong>Tanggal Booking</strong>
+                        <span>{{ $pelanggan->tanggal_booking }} {{ $pelanggan->jam_booking }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-white rounded-3 shadow-sm d-flex justify-content-between align-items-center">
+                        <strong>Tanggal Selesai</strong>
+                        <span>{{ $pelanggan->tanggal_selesai ?? '-' }} {{ $pelanggan->jam_selesai ?? '-' }}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-white rounded-3 shadow-sm d-flex justify-content-between align-items-center">
+                        <strong>Status Booking</strong>
+                        <span>
+                            @if($pelanggan->status == 'pending')
+                                <span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>Pending</span>
+                            @elseif($pelanggan->status == 'ongoing')
+                                <span class="badge bg-primary"><i class="bi bi-clock me-1"></i>Ongoing</span>
+                            @elseif($pelanggan->status == 'completed')
+                                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Completed</span>
+                            @elseif($pelanggan->status == 'cancelled')
+                                <span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Cancelled</span>
+                            @else
+                                <span class="badge bg-secondary">Unknown</span>
+                            @endif
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-white rounded-3 shadow-sm d-flex justify-content-between align-items-center">
+                        <strong>Created At</strong>
+                        <span>{{ $pelanggan->created_at->format('d M Y H:i') }}</span>
+                    </div>
+                </div>
+            </div>
 
-                {{-- EMAIL --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Email
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->email }}</td>
-                </tr>
+            <div class="text-center mt-4">
+                <a href="{{ route('adminpanel.pelanggan') }}" class="btn btn-secondary btn-lg">Kembali</a>
+            </div>
 
-                {{-- MERK MOBIL --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Merk Mobil
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->merk_mobil }}</td>
-                </tr>
-
-                {{-- TIPE MOBIL --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Tipe Mobil
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->tipe_mobil }}</td>
-                </tr>
-
-                {{-- TANGGAL BOOKING --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Tanggal Booking
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->tanggal_booking }}</td>
-                </tr>
-
-                {{-- JAM BOOKING --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Jam Booking
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->jam_booking }}</td>
-                </tr>
-
-                {{-- STATUS --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Status Booking
-                    </th>
-                    <td class="bg-white border rounded-end">
-
-                        @if ($pelanggan->status == 'pending')
-                            <span class="badge bg-warning text-dark">Pending</span>
-
-                        @elseif ($pelanggan->status == 'ongoing')
-                            <span class="badge bg-primary">Ongoing</span>
-
-                        @elseif ($pelanggan->status == 'completed')
-                            <span class="badge bg-success">Completed</span>
-
-                        @elseif ($pelanggan->status == 'cancelled')
-                            <span class="badge bg-danger">Cancelled</span>
-
-                        @else
-                            <span class="badge bg-secondary">Unknown</span>
-                        @endif
-
-                    </td>
-                </tr>
-
-                {{-- CREATED --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Created At
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->created_at }}</td>
-                </tr>
-
-                {{-- UPDATED --}}
-                <tr class="shadow-sm">
-                    <th class="bg-light fw-semibold" style="border-radius: 8px 0 0 8px;">
-                        Updated At
-                    </th>
-                    <td class="bg-white border rounded-end">{{ $pelanggan->updated_at }}</td>
-                </tr>
-
-            </tbody>
-        </table>
-
-        <a href="{{ route('adminpanel.pelanggan') }}" class="btn btn-secondary mt-3">Back</a>
-
+        </div>
     </div>
 </div>
 
