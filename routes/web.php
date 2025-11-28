@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\PelangganBackendController;
 use App\Http\Controllers\Frontend\ContactFrontendController;
 use App\Http\Controllers\Frontend\SejarahFrontendController;
 use App\Http\Controllers\Frontend\ServiceFrontendController;
+use App\Http\Controllers\Backend\SocialMediaBackendController;
 use App\Http\Controllers\Backend\TenagaKerjaBackendController;
 use App\Http\Controllers\Backend\TestimonialBackendController;
 
@@ -139,3 +140,12 @@ Route::get('/adminpanel/payment', [PaymentBackendController::class, 'index'])->n
 Route::get('/adminpanel/payment/show/{id}', [PaymentBackendController::class, 'show'])->name('adminpanel.payment.show');
 Route::delete('/adminpanel/payment/destroy/{id}', [PaymentBackendController::class, 'destroy'])->name('adminpanel.payment.destroy');
 Route::post('adminpanel/payment/{payment}/pay', [PaymentBackendController::class, 'pay'])->name('adminpanel.payment.pay');
+
+//MEDIA SOCIAL
+Route::get('/adminpanel/socialmedia', [SocialMediaBackendController::class, 'index'])->name('adminpanel.socialmedia');
+Route::get('/adminpanel/socialmedia/create', [SocialMediaBackendController::class, 'create'])->name('adminpanel.mediasocial.create');
+Route::post('/adminpanel/socialmedia/store', [SocialMediaBackendController::class, 'store'])->name('adminpanel.mediasocial.store');
+Route::get('/adminpanel/socialmedia/{id}/edit', [SocialMediaBackendController::class, 'edit'])->name('adminpanel.mediasocial.edit');
+Route::put('/adminpanel/socialmedia/{id}/update', [SocialMediaBackendController::class, 'update'])->name('adminpanel.mediasocial.update');
+Route::delete('/adminpanel/socialmedia/{id}/delete', [SocialMediaBackendController::class, 'destroy'])->name('adminpanel.mediasocial.delete');
+Route::get('/adminpanel/socialmedia/{id}/show', [SocialMediaBackendController::class, 'show'])->name('adminpanel.mediasocial.show');

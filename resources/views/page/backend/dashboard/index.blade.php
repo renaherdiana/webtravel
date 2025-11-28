@@ -41,32 +41,5 @@
     </div>
 </div>
 
-<!-- Latest Transactions -->
-<div class="card mt-4 shadow-sm">
-    <div class="card-header">
-        <strong>Latest Transactions</strong>
-    </div>
-
-    <table class="table mb-0">
-        <tr>
-            <th>#</th>
-            <th>User</th>
-            <th>Item</th>
-            <th>Status</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Ani</td>
-            <td>Ticket Bali</td>
-            <td><span class="badge bg-success">Success</span></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Budi</td>
-            <td>Hotel Bandung</td>
-            <td><span class="badge bg-warning">Pending</span></td>
-        </tr>
-    </table>
-</div>
 
 @endsection

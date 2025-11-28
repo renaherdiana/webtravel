@@ -3,85 +3,117 @@
 @section('content')
 
 <style>
-    /* ===== Custom Payment Form ===== */
+    /* ===== AESTHETIC SOFT PAYMENT UI ===== */
+    body {
+        background: #f7f5f2 !important; /* soft aesthetic background */
+    }
+
     .payment-card {
-        max-width: 500px;
-        margin: 40px auto;
-        padding: 2rem;
-        border-radius: 1rem;
-        background: #ffffff;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 3rem;
+        border-radius: 1.6rem;
+        background: #fffdfb;
+        border: 1px solid rgba(180, 170, 160, 0.20);
+        box-shadow: 0 18px 45px rgba(0,0,0,0.07);
+        transition: .35s ease;
     }
 
     .payment-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
-
-    .section-card {
-        background-color: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: .75rem;
-        margin-bottom: 1.5rem;
-        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-    }
-
-    .form-label {
-        font-weight: 600;
-        color: #333;
-    }
-
-    #amount {
-        border: 2px solid #4ade80;
-        border-radius: .5rem;
-        padding: .75rem 1rem;
-        font-size: 1.1rem;
-        transition: border 0.3s;
-    }
-
-    #amount:focus {
-        border-color: #16a34a;
-        box-shadow: 0 0 5px rgba(22,163,74,0.3);
-    }
-
-    .btn-pay {
-        background: linear-gradient(90deg, #4ade80, #16a34a);
-        color: #fff;
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding: .85rem 0;
-        border-radius: .75rem;
-        transition: 0.3s;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    .btn-pay:hover {
-        background: linear-gradient(90deg, #16a34a, #4ade80);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-
-    .payment-methods .btn {
-        margin-right: 5px;
-        margin-top: 5px;
-    }
-
-    .payment-header {
-        text-align: center;
-        margin-bottom: 1.5rem;
+        transform: translateY(-6px);
+        box-shadow: 0 22px 50px rgba(0,0,0,0.10);
     }
 
     .payment-header h2 {
-        color: #16a34a;
-        font-weight: 700;
-        margin-bottom: .5rem;
+        font-weight: 800;
+        font-size: 2.2rem;
+        letter-spacing: .5px;
+        color: #6c6c6c;
     }
 
     .payment-header p {
-        color: #555;
-        font-size: 1rem;
-        margin-bottom: 0;
+        font-size: 1.15rem;
+        color: #8b8b8b;
+        margin-top: .3rem;
     }
+
+    .section-card {
+        background: #faf9f7;
+        padding: 2rem;
+        border-radius: 1.2rem;
+        border: 1px solid rgba(180, 170, 160, 0.18);
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.04);
+        margin-bottom: 1.8rem;
+    }
+
+    .form-label {
+        color: #6c6c6c;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    #amount {
+        border: 2px solid #d7d4d0;
+        background: #ffffff;
+        padding: 1.1rem 1.2rem;
+        font-size: 1.25rem;
+        border-radius: 1rem;
+        transition: .3s;
+    }
+
+    #amount:focus {
+        border-color: #b7c6d9;
+        box-shadow: 0 0 8px rgba(150,165,185,0.25);
+    }
+
+    /* Payment method aesthetic chips */
+    .payment-methods label {
+        padding: .8rem 1.5rem;
+        border-radius: 1rem !important;
+        font-size: 1rem;
+        font-weight: 600;
+        background: #ffffff;
+        transition: .25s;
+    }
+
+    .payment-methods label:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    /* Soft outline colors */
+    .btn-outline-primary {
+        border-color: #b7c6d9 !important;
+        color: #6d7c8f !important;
+    }
+    .btn-outline-warning {
+        border-color: #e6d2a6 !important;
+        color: #b79a5b !important;
+    }
+    .btn-outline-success {
+        border-color: #cde3d7 !important;
+        color: #7ea897 !important;
+    }
+
+    /* Aesthetic Pay button */
+    .btn-pay {
+        background: linear-gradient(90deg, #e2d9d0, #c8d9e6);
+        color: #4a4a4a;
+        font-weight: 700;
+        padding: 1.1rem 0;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(200,180,170,0.25);
+        font-size: 1.2rem;
+        letter-spacing: .8px;
+        transition: .35s;
+    }
+
+    .btn-pay:hover {
+        transform: translateY(-3px);
+        background: linear-gradient(90deg, #d8ccc1, #b7cada);
+        box-shadow: 0 13px 30px rgba(200,180,170,0.3);
+    }
+
 </style>
 
 <!-- Header Start -->
@@ -94,42 +126,47 @@
             <li class="breadcrumb-item active text-primary">Payment</li>
         </ol>    
     </div>
-</div><br><br>
+</div>
+<br><br>
 <!-- Header End -->
 
 <div class="payment-card">
+
     <div class="payment-header">
         <h2>Payment</h2>
-        <p>Sisa pembayaran: <strong>Rp {{ number_format($payment->total - $payment->amount_paid,0,',','.') }}</strong></p>
+        <p>Sisa pembayaran: 
+            <strong>Rp {{ number_format($payment->total - $payment->amount_paid,0,',','.') }}</strong>
+        </p>
     </div>
 
-    <!-- Pilih Metode Pembayaran -->
+    <!-- Metode Pembayaran -->
     <div class="section-card payment-methods">
-        <h5 class="fw-bold mb-3 text-secondary">Pilih Metode Pembayaran</h5>
-        <input type="radio" class="btn-check" name="payment_method_radio" id="bank" autocomplete="off" value="bank" checked>
-        <label class="btn btn-outline-primary flex-fill" for="bank">Bank</label>
+        <h5 class="fw-bold mb-3 text-secondary" style="font-size:1.2rem;">Pilih Metode Pembayaran</h5>
 
-        <input type="radio" class="btn-check" name="payment_method_radio" id="ovo" autocomplete="off" value="ovo">
-        <label class="btn btn-outline-warning flex-fill" for="ovo">OVO</label>
+        <input type="radio" class="btn-check" name="payment_method_radio" id="bank" value="bank" checked>
+        <label class="btn btn-outline-primary" for="bank">Bank</label>
 
-        <input type="radio" class="btn-check" name="payment_method_radio" id="gopay" autocomplete="off" value="gopay">
-        <label class="btn btn-outline-success flex-fill" for="gopay">Gopay</label>
+        <input type="radio" class="btn-check" name="payment_method_radio" id="ovo" value="ovo">
+        <label class="btn btn-outline-warning" for="ovo">OVO</label>
+
+        <input type="radio" class="btn-check" name="payment_method_radio" id="gopay" value="gopay">
+        <label class="btn btn-outline-success" for="gopay">Gopay</label>
     </div>
 
-    <!-- Form Pembayaran -->
     <form id="paymentForm" action="{{ route('frontend.booking.pay', $payment->id) }}" method="POST">
         @csrf
         <input type="hidden" name="payment_method" id="selected_payment_method" value="bank">
         <input type="hidden" name="amount" id="selected_amount" value="{{ $payment->total - $payment->amount_paid }}">
 
         <div class="section-card">
-            <label class="form-label fw-bold">Jumlah yang ingin dibayar (Rp)</label>
+            <label class="form-label">Jumlah Pembayaran (Rp)</label>
             <input type="number" id="amount" class="form-control"
                    value="{{ $payment->total - $payment->amount_paid }}"
-                   max="{{ $payment->total - $payment->amount_paid }}" required>
+                   max="{{ $payment->total - $payment->amount_paid }}"
+                   required>
         </div>
 
-        <button type="submit" class="btn btn-pay w-100 fw-bold">
+        <button type="submit" class="btn btn-pay w-100">
             Confirm & Pay
         </button>
     </form>
@@ -137,11 +174,11 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const radioButtons = document.querySelectorAll('input[name="payment_method_radio"]');
+    const radios = document.querySelectorAll('input[name="payment_method_radio"]');
     const amountInput = document.getElementById('amount');
     const selectedAmount = document.getElementById('selected_amount');
 
-    radioButtons.forEach(rb => {
+    radios.forEach(rb => {
         rb.addEventListener('change', () => {
             document.getElementById('selected_payment_method').value = rb.value;
         });
@@ -159,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(amount > maxAmount) {
             e.preventDefault();
-            alert('Jumlah pembayaran tidak boleh lebih dari sisa pembayaran');
+            alert('Jumlah pembayaran tidak boleh melebihi sisa pembayaran');
             return;
         }
 
@@ -167,4 +204,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 @endsection

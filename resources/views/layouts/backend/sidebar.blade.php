@@ -129,6 +129,15 @@
                 </a>
             </li>
 
+            <!-- Social Media Menu (Single Item) -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('adminpanel/socialmedia*') ? 'active' : ''}}"
+                href="{{ route('adminpanel.socialmedia') }}">
+                    <i class="fas fa-share-alt" style="color:#6c63ff;"></i>
+                    <span>Social Media</span>
+                </a>
+            </li>
+
             <!-- ======================
                  MASTER DATA
             ======================= -->

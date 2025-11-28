@@ -1,81 +1,132 @@
-<!-- Footer Start -->
-        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <div class="footer-item">
-                                <h4 class="text-white mb-4">About Us</h4>
-                                <p class="mb-3">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="position-relative">
-                                <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email">
-                                <button type="button" class="btn btn-secondary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="text-white mb-4">Quick Links</h4>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> About</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Cars</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Car Types</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Team</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Contact us</a>
-                            <a href="#"><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="text-white mb-4">Business Hours</h4>
-                            <div class="mb-3">
-                                <h6 class="text-muted mb-0">Mon - Friday:</h6>
-                                <p class="text-white mb-0">09.00 am to 07.00 pm</p>
-                            </div>
-                            <div class="mb-3">
-                                <h6 class="text-muted mb-0">Saturday:</h6>
-                                <p class="text-white mb-0">10.00 am to 05.00 pm</p>
-                            </div>
-                            <div class="mb-3">
-                                <h6 class="text-muted mb-0">Vacation:</h6>
-                                <p class="text-white mb-0">All Sunday is our vacation</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="text-white mb-4">Contact Info</h4>
-                            <a href="#"><i class="fa fa-map-marker-alt me-2"></i> 123 Street, New York, USA</a>
-                            <a href="mailto:info@example.com"><i class="fas fa-envelope me-2"></i> info@example.com</a>
-                            <a href="tel:+012 345 67890"><i class="fas fa-phone me-2"></i> +012 345 67890</a>
-                            <a href="tel:+012 345 67890" class="mb-3"><i class="fas fa-print me-2"></i> +012 345 67890</a>
-                            <div class="d-flex">
-                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-facebook-f text-white"></i></a>
-                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-twitter text-white"></i></a>
-                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-instagram text-white"></i></a>
-                                <a class="btn btn-secondary btn-md-square rounded-circle me-0" href=""><i class="fab fa-linkedin-in text-white"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-<!-- Footer End -->
+<!-- =======================  AESTHETIC FOOTER START  ======================= -->
 
-<!-- Copyright Start -->
-        <div class="container-fluid copyright py-4">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-md-6 text-center text-md-start mb-md-0">
-                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+<style>
+    /* Links Footer */
+    .footer-links li a {
+        color: #d5d5d5;
+        text-decoration: none;
+        display: block;
+        padding: 6px 0;
+        transition: 0.3s;
+        font-weight: 300;
+        font-size: 15px;
+    }
+    .footer-links li a:hover {
+        color: #ffffff;
+        padding-left: 6px;
+    }
+
+    /* Footer Titles */
+    .footer-title {
+        font-weight: 600;
+        font-size: 22px;
+    }
+
+    /* Social Card Base */
+    .social-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border-radius: 18px;
+        padding: 12px 18px;
+        display: flex;
+        align-items: center;
+        background: #1a1a1a;
+        color: #fff;
+        margin-bottom: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .social-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    }
+    .social-card img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+        border: 2px solid #fff3;
+    }
+    .social-card p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    .social-card a {
+        color: #ccc;
+        font-size: 14px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .social-card a:hover {
+        color: #fff;
+    }
+
+    /* Specific Social Color Accent */
+    .social-instagram { border-left: 4px solid #E1306C; }
+    .social-tiktok    { border-left: 4px solid #000; }
+    .social-twitter   { border-left: 4px solid #1DA1F2; }
+    .social-facebook  { border-left: 4px solid #3b5998; }
+</style>
+
+<div class="container-fluid py-5" style="background: #0E0E0E;">
+    <div class="container py-5">
+        <div class="row g-5 align-items-start">
+
+            <!-- Quick Links -->
+            <div class="col-md-4">
+                <h4 class="text-white mb-4 footer-title">Quick Links</h4>
+                <ul class="list-unstyled footer-links">
+                    <li><a href="{{ route('frontend.home') }}"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+                    <li><a href="{{ route('frontend.sejarah') }}"><i class="fas fa-chevron-right me-2"></i>Sejarah</a></li>
+                    <li><a href="{{ route('frontend.service') }}"><i class="fas fa-chevron-right me-2"></i>Service</a></li>
+                    <li><a href="{{ route('frontend.contact') }}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+                </ul>
+            </div>
+
+             <!-- Social Media (Right Side) -->
+            <div class="col-md-4">
+                <h4 class="text-white mb-4 footer-title">Social Media</h4>
+
+                @foreach($socials as $social)
+                    <div class="social-card social-{{ strtolower($social->name) }}">
+                        <img src="{{ asset('storage/' . $social->photo) }}" alt="{{ $social->name }}">
+                        <div>
+                            <p>{{ $social->name }}</p>
+                            <a href="{{ $social->link }}" target="_blank">{{ $social->account_name }}</a>
+                        </div>
                     </div>
-                    <div class="col-md-6 text-center text-md-end text-body">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
-                    </div>
+                @endforeach
+            </div>
+
+            <!-- Business Hours (Right Aligned) -->
+            <div class="col-md-4 d-flex flex-column align-items-md-end">
+                <h4 class="text-white mb-4 footer-title">Business Hours</h4>
+                <div class="mb-3 text-md-end">
+                    <h6 class="text-muted mb-1">Mon - Fri</h6>
+                    <p class="text-white mb-0 fw-light">09.00 AM – 07.00 PM</p>
+                </div>
+                <div class="mb-3 text-md-end">
+                    <h6 class="text-muted mb-1">Saturday</h6>
+                    <p class="text-white mb-0 fw-light">10.00 AM – 05.00 PM</p>
+                </div>
+                <div class="text-md-end">
+                    <h6 class="text-muted mb-1">Sunday</h6>
+                    <p class="text-white mb-0 fw-light">Closed</p>
                 </div>
             </div>
+            </div>
         </div>
-<!-- Copyright End -->
+    </div>
+</div>
+
+<!-- Copyright -->
+<div class="container-fluid py-4" style="background:#080808;">
+    <div class="container text-center">
+        <p class="mb-0 text-white-50" style="font-size:14px;">
+            © 2025 <span class="text-white">Travino Travel</span> — All rights reserved.
+        </p>
+    </div>
+</div>
+
+<!-- =======================  AESTHETIC FOOTER END  ======================= -->
