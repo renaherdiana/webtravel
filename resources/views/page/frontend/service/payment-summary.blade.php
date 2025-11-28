@@ -139,19 +139,17 @@
         </p>
     </div>
 
-    <!-- Metode Pembayaran -->
+   <!-- Metode Pembayaran -->
     <div class="section-card payment-methods">
         <h5 class="fw-bold mb-3 text-secondary" style="font-size:1.2rem;">Pilih Metode Pembayaran</h5>
 
-        <input type="radio" class="btn-check" name="payment_method_radio" id="bank" value="bank" checked>
-        <label class="btn btn-outline-primary" for="bank">Bank</label>
+        <input type="radio" class="btn-check" name="payment_method_radio" id="cash" value="cash" checked>
+        <label class="btn btn-outline-success" for="cash">Cash</label>
 
-        <input type="radio" class="btn-check" name="payment_method_radio" id="ovo" value="ovo">
-        <label class="btn btn-outline-warning" for="ovo">OVO</label>
-
-        <input type="radio" class="btn-check" name="payment_method_radio" id="gopay" value="gopay">
-        <label class="btn btn-outline-success" for="gopay">Gopay</label>
+        <input type="radio" class="btn-check" name="payment_method_radio" id="transfer" value="transfer">
+        <label class="btn btn-outline-primary" for="transfer">Transfer</label>
     </div>
+
 
     <form id="paymentForm" action="{{ route('frontend.booking.pay', $payment->id) }}" method="POST">
         @csrf
