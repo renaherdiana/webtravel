@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <!-- Form Pembayaran Tambahan -->
+        <!-- FORM PEMBAYARAN TAMBAHAN -->
         @if($payment->status != 'paid' && $sisa > 0)
         <div class="payment-card mt-4 p-4 rounded shadow-sm" style="background: #e0f2fe;">
             <h5 class="fw-bold text-primary mb-3">Lakukan Pembayaran Tambahan</h5>
@@ -107,9 +107,8 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold">Metode Pembayaran</label>
                     <select name="payment_method" class="form-select" required>
-                        <option value="bank" selected>Bank</option>
-                        <option value="ovo">OVO</option>
-                        <option value="gopay">Gopay</option>
+                        <option value="cash" selected>Cash</option>
+                        <option value="transfer">Transfer</option>
                     </select>
                 </div>
 

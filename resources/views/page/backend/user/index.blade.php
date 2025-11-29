@@ -12,7 +12,7 @@
 
 <!-- Button Create -->
 <div class="mb-3 text-end">
-    <a href="#" class="btn btn-primary btn-sm">+ CREATE NEW</a>
+    <a href="{{ route('adminpanel.user.create') }}" class="btn btn-primary btn-sm">+ CREATE NEW</a>
 </div>
 
 <!-- Table -->
@@ -25,56 +25,61 @@
                     <th>Photo</th>
                     <th>Name</th>
                     <th>Role</th>
-                    <th style="text-align:center;">Action</th>
+                    <th style="text-align:center;">Status / Action</th>
                 </tr>
             </thead>
 
             <tbody>
-
-                <!-- DATA 1 -->
+                @forelse ($users as $index => $user)
                 <tr>
-                    <td>1</td>
-                    <td>
-                        <img src="{{ asset('assetsbackend/img/rena.jpg') }}" 
-                             class="rounded-circle" width="55" height="55" alt="Foto User">
-                    </td>
-                    <td>Rena Kumala</td>
-                    <td>Admin</td>
-                    <td class="text-center">
+                    <td>{{ $index + 1 }}</td>
 
+                    <!-- Foto -->
+                    <td>
+                        @if ($user->photo)
+                            <img src="{{ asset('storage/' . $user->photo) }}" 
+                                 class="rounded-circle" width="55" height="55" alt="Foto User">
+                        @else
+                            <span class="text-muted">No Image</span>
+                        @endif
+                    </td>
+
+                    <!-- Nama -->
+                    <td>{{ $user->name }}</td>
+
+                    <!-- Role -->
+                    <td>{{ ucfirst($user->role) }}</td>
+
+                    <!-- Status / Action -->
+                    <td class="text-center">
                         <div class="mb-2">
-                            <a href="#" class="btn btn-sm btn-info me-1">Detail</a>
-                            <a href="#" class="btn btn-sm btn-warning me-1">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="{{ route('adminpanel.user.edit', $user->id) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+
+                            <form action="{{ route('adminpanel.user.delete', $user->id) }}" 
+                                  method="POST" class="d-inline"
+                                  onsubmit="return confirm('Yakin ingin menghapus user ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+
+                            <a href="{{ route('adminpanel.user.show', $user->id) }}" class="btn btn-sm btn-info ms-1">Detail</a>
                         </div>
 
-                        <span class="badge bg-success">Active</span>
-
+                        @if ($user->status === 'active')
+                            <span class="badge bg-success">Active</span>
+                        @else
+                            <span class="badge bg-secondary">Inactive</span>
+                        @endif
                     </td>
                 </tr>
-
-                <!-- DATA 2 -->
+                @empty
                 <tr>
-                    <td>2</td>
-                    <td>
-                        <img src="{{ asset('assetsbackend/img/rena.jpg') }}" 
-                             class="rounded-circle" width="55" height="55" alt="Foto User">
-                    </td>
-                    <td>Rico Pratama</td>
-                    <td>Staff</td>
-                    <td class="text-center">
-
-                        <div class="mb-2">
-                            <a href="#" class="btn btn-sm btn-info me-1">Detail</a>
-                            <a href="#" class="btn btn-sm btn-warning me-1">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                        </div>
-
-                        <span class="badge bg-secondary">Inactive</span>
-
+                    <td colspan="5" class="text-center py-4">
+                        <strong>Tidak ada data user.</strong>
                     </td>
                 </tr>
-
+                @endforelse
             </tbody>
         </table>
     </div>

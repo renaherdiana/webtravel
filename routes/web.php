@@ -114,6 +114,12 @@ Route::delete('/adminpanel/testimonial/delete/{id}', [TestimonialBackendControll
 
 //USER
 Route::get('/adminpanel/user', [UserBackendController::class, 'index'])->name('adminpanel.user');
+Route::get('/adminpanel/user/create', [UserBackendController::class, 'create'])->name('adminpanel.user.create');
+Route::post('/adminpanel/user', [UserBackendController::class, 'store'])->name('adminpanel.user.store');
+Route::get('/adminpanel/user/{user}/edit', [UserBackendController::class, 'edit'])->name('adminpanel.user.edit');
+Route::put('/adminpanel/user/{user}', [UserBackendController::class, 'update'])->name('adminpanel.user.update');
+Route::delete('/adminpanel/user/{user}', [UserBackendController::class, 'destroy'])->name('adminpanel.user.delete');
+Route::get('/adminpanel/user/{user}', [UserBackendController::class, 'show'])->name('adminpanel.user.show');
 
 //PELANGGAN
 Route::get('/adminpanel/pelanggan', [PelangganBackendController::class, 'index'])->name('adminpanel.pelanggan');

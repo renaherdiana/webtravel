@@ -12,34 +12,35 @@
 
 <!-- Dashboard Cards -->
 <div class="row g-3">
+
     <div class="col-md-3">
         <div class="card p-3 shadow-sm">
             <h6>Total Users</h6>
-            <h3 class="fw-bold">120</h3>
+            <h3 class="fw-bold">{{ $total_users }}</h3>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card p-3 shadow-sm">
-            <h6>Orders</h6>
-            <h3 class="fw-bold">85</h3>
+            <h6>Total Pelanggan</h6>
+            <h3 class="fw-bold">{{ $total_pelanggan }}</h3>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card p-3 shadow-sm">
-            <h6>Products</h6>
-            <h3 class="fw-bold">42</h3>
+            <h6>Total Service</h6>
+            <h3 class="fw-bold">{{ $total_service }}</h3>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card p-3 shadow-sm">
-            <h6>Revenue</h6>
-            <h3 class="fw-bold">$1,240</h3>
+            <h6>Total Supir</h6>
+            <h3 class="fw-bold">{{ $total_supir }}</h3>
         </div>
     </div>
+
 </div>
-
 
 @endsection
