@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Backend\HeroBackendController;
 use App\Http\Controllers\Backend\UserBackendController;
 use App\Http\Controllers\Backend\AboutBackendController;
@@ -20,6 +22,13 @@ use App\Http\Controllers\Frontend\ServiceFrontendController;
 use App\Http\Controllers\Backend\SocialMediaBackendController;
 use App\Http\Controllers\Backend\TenagaKerjaBackendController;
 use App\Http\Controllers\Backend\TestimonialBackendController;
+
+//LOGIN
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+//REGISTER
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+
 
 //FRONTEND
 Route::get('/home/frontend', [HomeFrontendController::class, 'index'])->name('frontend.home');
