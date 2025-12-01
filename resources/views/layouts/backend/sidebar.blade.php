@@ -216,13 +216,15 @@
 
             <hr class="horizontal dark mt-3">
 
-            <!-- Logout -->
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">
+           <li class="nav-item">
+            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="nav-link btn btn-link p-0 m-0" style="text-decoration:none;">
                     <i class="ni ni-button-power"></i>
                     <span>Log Out</span>
-                </a>
-            </li>
+                </button>
+            </form>
+        </li>
 
         </ul>
     </div>

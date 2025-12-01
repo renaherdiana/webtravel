@@ -12,7 +12,10 @@ use Carbon\Carbon;
 
 class ServiceFrontendController extends Controller
 {
-    // Daftar layanan mobil
+
+    /**
+     * Halaman daftar layanan mobil
+     */
     public function index(Request $request)
     {
         $query = Service::where('status', 'active');
@@ -25,97 +28,118 @@ class ServiceFrontendController extends Controller
         return view('page.frontend.service.index', compact('services'));
     }
 
-    // Halaman booking
+    /**
+     * Halaman booking form
+     */
     public function booking(Request $request)
     {
-        $services = Service::where('status', 'active')->orderBy('id', 'DESC')->get();
-        $supirs = Supir::where('status', 'active')->orderBy('name', 'ASC')->get();
-        $selectedService = $request->mobil_id ? Service::find($request->mobil_id) : null;
+        $services = Service::where('status', 'active')->orderBy('id','DESC')->get();
+        $supirs   = Supir::where('status', 'active')->orderBy('name','ASC')->get();
 
-        return view('page.frontend.service.booking', compact('services', 'supirs', 'selectedService'));
+        $selectedService = $request->has('mobil_id') ? Service::find($request->mobil_id) : null;
+        $selectedSupir   = $request->has('supir_id') ? Supir::find($request->supir_id) : null;
+
+        return view('page.frontend.service.booking', compact(
+            'services', 
+            'supirs', 
+            'selectedService', 
+            'selectedSupir'
+        ));
     }
 
-    // Simpan booking & payment
+    /**
+     * Simpan data booking pelanggan dan payment
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'telepon' => 'required',
-            'email' => 'required|email',
-            'mobil_id' => 'required|exists:services,id',
+            'nama'        => 'required',
+            'telepon'     => 'required',
+            'email'       => 'required|email',
+            'mobil_id'    => 'required|exists:services,id',
             'pickup_date' => 'required|date',
             'pickup_time' => 'required',
-            'dropoff_date' => 'required|date',
-            'dropoff_time' => 'required',
+            'dropoff_date'=> 'required|date',
+            'dropoff_time'=> 'required',
         ]);
 
-        $service = Service::findOrFail($request->mobil_id);
-        $supir = $request->supir_id ? Supir::find($request->supir_id) : null;
+        $service = Service::find($request->mobil_id);
+        $supir   = $request->supir_id ? Supir::find($request->supir_id) : null;
 
         // Simpan data pelanggan
         $pelanggan = Pelanggan::create([
-            'nama' => $request->nama,
-            'telepon' => $request->telepon,
-            'email' => $request->email,
-            'merk_mobil' => $service->merk_mobil,
-            'tipe_mobil' => $service->nama_mobil,
+            'nama'            => $request->nama,
+            'telepon'         => $request->telepon,
+            'email'           => $request->email,
+            'merk_mobil'      => $service->merk_mobil,
+            'tipe_mobil'      => $service->nama_mobil,
             'tanggal_booking' => $request->pickup_date,
-            'jam_booking' => $request->pickup_time,
+            'jam_booking'     => $request->pickup_time,
             'tanggal_selesai' => $request->dropoff_date,
-            'jam_selesai' => $request->dropoff_time,
-            'status' => 'pending',
-            'supir_id' => $supir?->id,
+            'jam_selesai'     => $request->dropoff_time,
+            'status'          => 'pending',
+            'supir_id'        => $supir?->id,
         ]);
 
-        // Hitung total harga
-        $days = Carbon::parse($request->pickup_date)
-                    ->diffInDays(Carbon::parse($request->dropoff_date)) + 1;
-        $totalMobil = $service->harga_sewa * $days;
-        $totalSupir = $supir ? $supir->price * $days : 0;
-        $grandTotal = $totalMobil + $totalSupir;
+        // Hitung jumlah hari booking
+        $pickup  = Carbon::parse($request->pickup_date);
+        $dropoff = Carbon::parse($request->dropoff_date);
+        $hari    = $dropoff->diffInDays($pickup) + 1;
+
+        // Hitung total harga (mobil + supir)
+        $totalMobil = $service->harga_sewa * $hari;
+        $totalSupir = $supir ? $supir->price * $hari : 0;
+        $total      = $totalMobil + $totalSupir;
 
         // Simpan payment
         $payment = Payment::create([
             'pelanggan_id' => $pelanggan->id,
-            'total' => $grandTotal,
-            'amount_paid' => 0,
-            'status' => 'pending',
+            'total'        => $total,
+            'amount_paid'  => 0,
+            'status'       => 'pending',
         ]);
 
+        // Redirect ke halaman payment summary
         return redirect()->route('frontend.booking.payment', $payment->id)
-                         ->with('success', 'Booking berhasil! Silahkan lanjut ke pembayaran.');
+                         ->with('success', 'Booking berhasil disimpan! Silahkan lanjut ke pembayaran.');
     }
 
-    // Payment Summary (input jumlah bayar)
-        public function paymentSummary($paymentId)
+    /**
+     * Halaman Payment Summary
+     */
+    public function paymentSummary($paymentId)
     {
         $payment = Payment::with('pelanggan.supir')->findOrFail($paymentId);
         $pelanggan = $payment->pelanggan;
 
-        $days = Carbon::parse($pelanggan->tanggal_booking)
-                    ->diffInDays(Carbon::parse($pelanggan->tanggal_selesai)) + 1;
+        // Hitung jumlah hari booking
+        $pickup  = Carbon::parse($pelanggan->tanggal_booking);
+        $dropoff = Carbon::parse($pelanggan->tanggal_selesai);
+        $days    = $dropoff->diffInDays($pickup) + 1;
 
+        // Total mobil dan supir
         $service = Service::where('nama_mobil', $pelanggan->tipe_mobil)
-                        ->where('merk_mobil', $pelanggan->merk_mobil)
-                        ->first();
+                          ->where('merk_mobil', $pelanggan->merk_mobil)
+                          ->first();
 
         $totalMobil = $service ? $service->harga_sewa * $days : 0;
         $totalSupir = $pelanggan->supir ? $pelanggan->supir->price * $days : 0;
         $grandTotal = $totalMobil + $totalSupir;
-
-        $sisa = $grandTotal - ($payment->amount_paid ?? 0); // <--- tambahan ini
+        $sisa = $grandTotal - ($payment->amount_paid ?? 0);
 
         return view('page.frontend.service.payment-summary', compact(
             'payment', 'pelanggan', 'days', 'totalMobil', 'totalSupir', 'grandTotal', 'sisa'
         ));
     }
 
-    // Proses pembayaran (multi / partial)
+    /**
+     * Proses pembayaran
+     */
     public function pay(Request $request, $paymentId)
     {
         $request->validate([
             'payment_method' => 'required|string',
-            'amount' => 'required|numeric|min:1',
+            'amount'         => 'required|numeric|min:1',
         ]);
 
         $payment = Payment::findOrFail($paymentId);
@@ -123,7 +147,7 @@ class ServiceFrontendController extends Controller
         $remaining = $payment->total - $payment->amount_paid;
         $amount = min(floatval($request->amount), $remaining);
 
-        $payment->amount_paid += $amount;
+        $payment->amount_paid = ($payment->amount_paid ?? 0) + $amount;
         $payment->payment_method = $request->payment_method;
 
         // Update status otomatis
@@ -138,29 +162,28 @@ class ServiceFrontendController extends Controller
         $payment->save();
 
         return redirect()->route('frontend.booking.detail', $paymentId)
-                         ->with('success', 'Pembayaran berhasil! Sisa bayar: Rp ' . number_format($payment->total - $payment->amount_paid, 0, ',', '.'));
-    }
+                 ->with('success', 'Pembayaran berhasil! Sisa bayar: Rp ' . number_format($payment->total - $payment->amount_paid, 0, ',', '.'));
+        }
+        // Controller
+        public function paymentDetail($paymentId)
+        {
+            $payment = Payment::with('pelanggan.supir')->findOrFail($paymentId);
+            $pelanggan = $payment->pelanggan;
 
-    // Detail pembayaran
-    public function paymentDetail($paymentId)
-    {
-        $payment = Payment::with('pelanggan.supir')->findOrFail($paymentId);
-        $pelanggan = $payment->pelanggan;
+            $days = Carbon::parse($pelanggan->tanggal_booking)
+                        ->diffInDays(Carbon::parse($pelanggan->tanggal_selesai)) + 1;
 
-        $days = Carbon::parse($pelanggan->tanggal_booking)
-                    ->diffInDays(Carbon::parse($pelanggan->tanggal_selesai)) + 1;
+            $service = Service::where('nama_mobil', $pelanggan->tipe_mobil)
+                            ->where('merk_mobil', $pelanggan->merk_mobil)
+                            ->first();
 
-        $service = Service::where('nama_mobil', $pelanggan->tipe_mobil)
-                        ->where('merk_mobil', $pelanggan->merk_mobil)
-                        ->first();
+            $totalMobil = $service ? $service->harga_sewa * $days : 0;
+            $totalSupir = $pelanggan->supir ? $pelanggan->supir->price * $days : 0;
+            $grandTotal = $totalMobil + $totalSupir;
 
-        $totalMobil = $service ? $service->harga_sewa * $days : 0;
-        $totalSupir = $pelanggan->supir ? $pelanggan->supir->price * $days : 0;
-        $grandTotal = $totalMobil + $totalSupir;
-
-        return view('page.frontend.service.payment-detail', compact(
-            'payment', 'pelanggan', 'days', 'totalMobil', 'totalSupir', 'grandTotal'
-        ));
-    }
+            return view('page.frontend.service.payment-detail', compact(
+                'payment', 'pelanggan', 'days', 'totalMobil', 'totalSupir', 'grandTotal'
+            ));
+        }
 
 }

@@ -23,16 +23,23 @@ use App\Http\Controllers\Backend\SocialMediaBackendController;
 use App\Http\Controllers\Backend\TenagaKerjaBackendController;
 use App\Http\Controllers\Backend\TestimonialBackendController;
 
+Route::get('/', function () {return redirect()->route('login');});
+
 //LOGIN
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.process');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //REGISTER
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 
 //FRONTEND
 Route::get('/home/frontend', [HomeFrontendController::class, 'index'])->name('frontend.home');
 Route::get('/sejarah/frontend', [SejarahFrontendController::class, 'index'])->name('frontend.sejarah');
+
+Route::middleware(['auth', 'role:customer'])->group(function () {
 
 //BOOKING
 Route::get('/service/frontend', [ServiceFrontendController::class, 'index'])->name('frontend.service');
@@ -41,11 +48,14 @@ Route::post('/booking/store', [ServiceFrontendController::class, 'store'])->name
 Route::get('/booking/payment-summary/{payment}', [ServiceFrontendController::class, 'paymentSummary'])->name('frontend.booking.payment');
 Route::post('/booking/pay/{payment}', [ServiceFrontendController::class, 'pay'])->name('frontend.booking.pay');
 Route::get('/booking/detail/{payment}', [ServiceFrontendController::class, 'paymentDetail'])->name('frontend.booking.detail');
+});
 
 //CONTACT
 Route::get('/contact/frontend', [ContactFrontendController::class, 'index'])->name('frontend.contact');
 Route::post('/contact/send', [ContactFrontendController::class, 'store'])->name('contact.send');
 
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    
 //BACKEND
 Route::get('/adminpanel/travel', [DashboardBackendController::class, 'index'])->name('adminpanel.travel');
 
@@ -164,3 +174,5 @@ Route::get('/adminpanel/socialmedia/{id}/edit', [SocialMediaBackendController::c
 Route::put('/adminpanel/socialmedia/{id}/update', [SocialMediaBackendController::class, 'update'])->name('adminpanel.mediasocial.update');
 Route::delete('/adminpanel/socialmedia/{id}/delete', [SocialMediaBackendController::class, 'destroy'])->name('adminpanel.mediasocial.delete');
 Route::get('/adminpanel/socialmedia/{id}/show', [SocialMediaBackendController::class, 'show'])->name('adminpanel.mediasocial.show');
+
+});
